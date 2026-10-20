@@ -33,18 +33,19 @@ export function nav(active, variant = 'full', cta = null) {
   const items = variant === 'minimal' ? NAV_MINIMAL : NAV, menuItems = variant === 'minimal' ? NAV_MINIMAL : [...NAV, ...MENU_EXTRA];
   const link = ([l, h]) => `<li><a class="nav__link${active === h ? ' is-active' : ''}" href="${h}"${active === h ? ' aria-current="page"' : ''}>${l}</a></li>`;
   const mlink = ([l, h]) => `<li><a href="${h}"${active === h ? ' aria-current="page"' : ''}>${l}</a></li>`;
+  const landing = variant === 'landing'; // landing pages: logo + one CTA, no menu (one page, one action)
   return `<header class="nav" id="nav">
   <div class="container nav__inner">
     <a href="/" class="nav__logo" aria-label="Durga.design home">Durga<i></i>design</a>
-    <ul class="nav__links">${items.map(link).join('')}</ul>
+    ${landing ? '<span style="margin-left:auto"></span>' : `<ul class="nav__links">${items.map(link).join('')}</ul>`}
     <a class="btn btn-primary btn-sm nav__cta" href="${c.href}"${ctaAttrs}>${c.label} <span class="arr${c.download ? ' arr--down' : ''}">${ctaArrow}</span></a>
-    <button class="nav__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+    ${landing ? '' : '<button class="nav__burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><span></span></button>'}
   </div>
 </header>
-<nav class="menu" id="menu" aria-label="Site">
+${landing ? '' : `<nav class="menu" id="menu" aria-label="Site">
   <ul>${menuItems.map(mlink).join('')}</ul>
   <a class="btn btn-primary btn-lg" href="${c.href}"${ctaAttrs}>${cta ? c.label : 'Book a 15-min call'} <span class="arr">${ctaArrow}</span></a>
-</nav>`;
+</nav>`}`;
 }
 
 export function footer({ kicker = 'Free · No commitment · 15 minutes', title = 'Got a <em>friction</em><br>problem? Let\'s talk.', variant = 'full' } = {}) {
@@ -53,7 +54,7 @@ export function footer({ kicker = 'Free · No commitment · 15 minutes', title =
   <div class="container">
     <p class="footer__kicker rv"><b>✦</b> ${kicker}</p>
     <h2 class="footer__cta rv" style="--i:1">${title}</h2>
-    <div class="footer__grid${variant === 'recruiter' ? ' footer__grid--recruiter' : ''}">
+    <div class="footer__grid${variant === 'recruiter' || variant === 'landing' ? ' footer__grid--recruiter' : ''}">
       <div class="rv" style="--i:2">
         <div class="mail">
           <a href="mailto:${EMAIL}">${EMAIL}</a>
@@ -63,7 +64,9 @@ export function footer({ kicker = 'Free · No commitment · 15 minutes', title =
           ? `<div style="margin-top:var(--sp-6)"><a class="btn btn-accent btn-lg" href="${RESUME}" download>Download resume <span class="arr arr--down">↓</span></a></div>`
           : `<div style="margin-top:var(--sp-6)"><a class="btn btn-accent btn-lg" href="${CAL}" target="_blank" rel="noopener">Book a 15-min call <span class="arr">↗</span></a></div>`}
       </div>
-      ${variant === 'recruiter' ? `
+      ${variant === 'landing' ? `
+      ${col('On this page', [['How it works', '#how'], ['Packages', '#packages'], ['Case studies', '#cases'], ['FAQ', '#faq']])}
+      ${col('Elsewhere', [['LinkedIn', LINKEDIN], ['X (Twitter)', X_URL]])}` : variant === 'recruiter' ? `
       ${col('On this page', [['Selected work', '#work'], ['About me', '#about']])}
       ${col('Elsewhere', [['LinkedIn', LINKEDIN], ['X (Twitter)', X_URL]])}` : `
       ${col('Explore', [['Work', '/work/'], ['Services', '/services/'], ['Expertise', '/expertise/'], ['About', '/about/'], ['Hire me', '/hire/'], ['Contact', '/contact/']])}

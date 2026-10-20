@@ -779,6 +779,200 @@ ${faqSection(t.faqs, 'FAQ.')}
 }
 
 /* ======================================================================
+   /saas-activation — SaaS Activation Sprint landing page
+   Source: "Service Business Playbook + 90-Day Sprint" (page spec, packages, proof, FAQ topics).
+   One page, one buyer, one action. No resume / "open to roles" here. Focused nav + footer.
+   ====================================================================== */
+{
+  const LANDING = {
+    sampleTeardownUrl: null, // set to the public Loom URL once recorded → the sample section shows it
+    replyPromise: 'I reply within 24 hours.'
+  };
+  const PACKAGES = [
+    { name: 'Free teardown', price: '$0', unit: '', time: 'Sent within 48 hours', items: ['A 3–5 min Loom of your signup and first-run flow', '3 quick wins you can ship this week'], cta: ['Get a free teardown', '#request'] },
+    { name: 'Activation Audit', price: '$499', unit: 'one-time', time: '5 working days', items: ['UXAuditX report plus my expert review of signup → first value', '10–15 prioritised fixes', '45-min walkthrough call'], cta: ['Book a call', CAL], note: 'Fully credited if you book the Sprint within 14 days.' },
+    { name: 'Activation Sprint', price: '$3,000', unit: 'from $2.5–4k by scope', time: '3 weeks', items: ['Includes the Audit', 'Redesigned onboarding in Figma: signup, setup, empty states, first key action', 'Clickable prototype', 'Dev handoff', '2 review calls'], cta: ['Book a call', CAL], featured: true },
+    { name: 'Activation Retainer', price: '$1,500', unit: '/mo light · $2,000/mo standard', time: 'Monthly, 3-month minimum', items: ['Design for 1–2 experiments a month', 'Weekly async updates', 'One 30-min call a week'], cta: ['Book a call', CAL] }
+  ];
+  const CASES = [
+    { slug: 'eyeontask', name: 'EyeOnTask', tag: 'B2B SaaS · Field service', img: '/assets/eyeontask.png',
+      problem: 'Office and field teams worked from WhatsApp and paper slips. Nobody knew a job’s status.',
+      change: 'One shared job module with live status for every role, from admin to fieldworker.',
+      result: 'Churn dropped from 28% to 13%. Play Store rating went from 2.8 to 4.4.' },
+    { slug: 'dhani', name: 'Dhani', tag: 'Fintech · Mobile', img: '/assets/dhani.png',
+      problem: 'Paying a bill took 8 steps, with the same details typed in every month.',
+      change: 'Smart bill cards on the home screen and one checkout sheet with saved defaults.',
+      result: '8 steps became 2 taps, for 50M+ app users.' }
+  ];
+  const FAQ = [
+    { q: 'What timezone do you work in?', a: 'I work US mornings. My evening in India overlaps the US East Coast morning, so our calls happen in your working day.' },
+    { q: 'How does the process work?', a: 'Start with a free teardown or a short call. Then a 5-day Audit finds the biggest leaks. If the fixes make sense, a 3-week Sprint redesigns the flow. A monthly retainer is optional after launch, to run experiments and measure the lift.' },
+    { q: 'What tools do you use?', a: 'Figma for design and prototypes, Loom for async updates, and email or a shared Slack channel for day-to-day questions.' },
+    { q: 'How does payment work?', a: 'The Audit is paid 100% upfront. The Sprint is 50% to start and 50% on handoff. The retainer is billed monthly in advance. The full $499 Audit fee is credited if you book the Sprint within 14 days.' },
+    { q: 'What do you need from us?', a: 'A test account for your product, your analytics if you have them, the activation metric you care about, and one point of contact.' },
+    { q: 'Do you build it too?', a: 'No. I design the flow and hand it off with a Figma file, a clickable prototype and a Loom walkthrough. I answer developer questions for 14 days after handoff.' }
+  ];
+  const track = name => ` data-track="${name}"`;
+  const pkg = (p, i) => `<article class="price${p.featured ? ' price--featured' : ''} rv" style="--i:${i % 2}">
+    ${p.featured ? '<span class="price__flag">Core offer</span>' : ''}
+    <h3 class="t-card-title">${esc(p.name)}</h3>
+    <div class="price__amount">${esc(p.price)}${p.unit ? `<small> ${esc(p.unit)}</small>` : ''}</div>
+    <p class="t-caption">${esc(p.time)}</p>
+    ${list(p.items)}
+    ${p.note ? `<p class="t-caption" style="color:var(--clr-accent);font-weight:600">${esc(p.note)}</p>` : ''}
+    <div style="margin-top:auto">${btn(p.cta[0], p.cta[1], p.featured ? 'primary' : 'secondary', 'lg').replace('<a ', `<a${track('pkg-' + i)} `)}</div>
+  </article>`;
+  const caseCard = (c, i) => `<a class="card rv" style="--i:${i}" href="/work/${c.slug}/">
+    <div class="card__media"><img src="${c.img}" alt="${attr(c.name)} redesign" loading="lazy"></div>
+    <div class="card__body">
+      <p class="card__kicker"><b>${esc(c.name)}</b><span>${esc(c.tag)}</span></p>
+      <dl class="pcr">
+        <div><dt>Problem</dt><dd>${esc(c.problem)}</dd></div>
+        <div><dt>What I changed</dt><dd>${esc(c.change)}</dd></div>
+        <div><dt>Result</dt><dd>${esc(c.result)}</dd></div>
+      </dl>
+      <div class="card__foot"><span>Read the full case study</span><span class="go" aria-hidden="true">↗</span></div>
+    </div>
+  </a>`;
+  const ctaPair = (size = 'lg') => `${btn('Get a free activation teardown', '#request', 'primary', size).replace('<a ', `<a${track('cta-teardown')} `)}${btn('Book a call', CAL, 'secondary', size).replace('<a ', `<a${track('cta-call')} `)}`;
+
+  const body = `<section class="page-hero lp-hero">
+  <div class="container">
+    <p class="t-label eyebrow fade-in">SaaS Activation Sprint · for B2B SaaS, seed to Series A</p>
+    <h1 class="t-hero lp-hero__title fade-in" style="--d:.1s">Turn more trial signups into <em>active</em> users.</h1>
+    <p class="t-lead page-hero__lead fade-in" style="--d:.2s">I redesign onboarding for B2B SaaS teams with a self-serve trial or freemium plan, so new users reach the moment your product clicks before the trial ends.</p>
+    <div class="page-hero__actions fade-in" style="--d:.3s">${ctaPair()}</div>
+  </div>
+</section>
+
+<section class="section-md" id="problem">
+  <div class="container">
+    ${shead('The problem', 'Signups are fine. <em>Activation</em> isn’t.', '<p class="t-body">Think of a gym that sells memberships in January and never sees most people again by March. The signup worked. The habit never formed. Trials work the same way.</p>')}
+    <div class="card-grid">${[
+      ['Signups are fine, activation isn’t.', 'People create accounts, look around once, and never come back to do the one thing that makes the product useful.'],
+      ['Users stall at setup.', 'Connecting data, inviting the team, picking settings. Each step is a place to quit, and most people quietly do.'],
+      ['Trials end before anyone sees value.', 'The trial clock runs out while users are still figuring out where to start, so the paywall feels like a surprise.']
+    ].map(([t, x], i) => `<div class="card rv" style="--i:${i}"><div class="card__body"><span class="card__icon" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><h3 class="card__title">${t}</h3><p class="card__text">${x}</p></div></div>`).join('')}</div>
+  </div>
+</section>
+
+<section class="section-sm band-alt" aria-label="Proof">
+  <div class="container">
+    ${statGrid([{ value: '28% → 13%', label: 'EyeOnTask churn after the redesign' }, { value: '8 → 2', label: 'Dhani bill payment: steps to taps' }, { value: '50M+', label: 'Users served by flows I designed' }])}
+    <div class="lp-logos rv" aria-label="Teams I’ve designed for">
+      <span class="logos__label">Designed for</span>
+      <img src="/assets/logo-dhani.png" alt="Dhani"><img src="/assets/logo-indiabulls.svg" alt="Indiabulls"><img src="/assets/logo-eyeontask.png" alt="EyeOnTask"><span class="wordmark">Vestas</span>
+    </div>
+  </div>
+</section>
+
+<section class="section-md" id="how">
+  <div class="container">
+    ${shead('How it works', 'One path, three <em>steps</em>.')}
+    ${process([
+      { title: 'Audit', text: 'I map signup to first value and find the 10–15 places people drop off. 5 working days.' },
+      { title: 'Sprint', text: 'I redesign that flow in Figma, test it as a prototype, and hand it to your developers. 3 weeks.' },
+      { title: 'Retainer', text: 'After launch, I design 1–2 experiments a month so activation keeps going up.' }], 3)}
+  </div>
+</section>
+
+<section class="section-md band-alt" id="packages">
+  <div class="container">
+    ${shead('Packages', 'Clear prices, <em>no</em> surprises.', '<p class="t-body">Start free, then go one step at a time. You never have to buy the whole ladder.</p>')}
+    <div class="price-grid">${PACKAGES.map(pkg).join('')}</div>
+  </div>
+</section>
+
+<section class="section-md" id="sample">
+  <div class="container">
+    ${shead('Sample teardown', 'See how I think <em>before</em> you pay.')}
+    ${LANDING.sampleTeardownUrl
+      ? `<div class="callout rv"><p class="callout__label">Sample · public SaaS onboarding</p><p class="t-body">A 3–5 minute walkthrough of a real signup flow, with the fixes I’d make.</p><div>${btn('Watch the sample teardown', LANDING.sampleTeardownUrl, 'primary', 'lg')}</div></div>`
+      : `<div class="split" style="border-top:0;padding-top:0">
+      <div class="split__head"><p class="cs-section__k rv">What you get</p><h3 class="t-h3 rv">Your own product, recorded.</h3><p class="rv">Free, sent within 48 hours. No call needed.</p></div>
+      <div class="rv" style="--i:1">${list(['A 3–5 minute Loom where I sign up for your product as a new user and talk through what I see', 'The exact points where a new user is likely to stall or leave', '3 quick wins your team can ship this week', 'Annotated screenshots you can drop straight into a ticket'], 'arrow')}
+        <div style="margin-top:var(--sp-8)">${btn('Get my free teardown', '#request', 'primary', 'lg').replace('<a ', `<a${track('cta-teardown-sample')} `)}</div></div>
+    </div>`}
+  </div>
+</section>
+
+<section class="section-md band-alt" id="cases">
+  <div class="container">
+    ${shead('Case studies', 'Flows I’ve already <em>fixed</em>.')}
+    <div class="card-grid card-grid--2">${CASES.map(caseCard).join('')}</div>
+  </div>
+</section>
+
+<section class="section-md" id="about">
+  <div class="container lp-about">
+    <figure class="lp-about__photo rv"><img src="/assets/portrait.jpg" alt="Durga Prasad" loading="lazy"></figure>
+    <div class="rv" style="--i:1">
+      <p class="t-label eyebrow">Who you’ll work with</p>
+      <div class="about__quote" style="margin-bottom:var(--sp-4)">I’m Durga, a product designer with <em>8+ years</em> in fintech and B2B SaaS.</div>
+      <p class="t-body" style="max-width:56ch">I’ve redesigned flows used by 50M+ people. I take on a few activation projects at a time, so every one gets my full attention.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-md band-alt">
+  <div class="container">
+    ${shead('Testimonials', 'What clients <em>say</em>.')}
+    <div class="card-grid">${TESTIMONIALS.map(quoteCard).join('')}</div>
+  </div>
+</section>
+
+<section class="section-md" id="faq">
+  <div class="container">
+    ${shead('FAQ', 'Before you <em>book</em>.')}
+    ${faq(FAQ)}
+  </div>
+</section>
+
+<section class="section-md band-alt" id="request">
+  <div class="container lp-request">
+    <div>
+      <p class="t-label eyebrow rv">Free activation teardown</p>
+      <h2 class="t-h2 rv" style="--i:1">Show me where users <em>stall</em>.</h2>
+      <p class="t-body rv" style="--i:2;margin-block:var(--sp-4) var(--sp-8)">Tell me about your product and I’ll send a short video of your signup and first-run flow, with 3 quick wins. ${LANDING.replyPromise}</p>
+      <div class="rv" style="--i:3">${btn('Or book a call', CAL, 'secondary', 'lg').replace('<a ', `<a${track('cta-call-request')} `)}</div>
+    </div>
+    <form class="lp-form rv" id="teardown-form" style="--i:2" novalidate>
+      <div class="field"><label for="tf-name">Your name</label><input class="input" id="tf-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="tf-url">Company URL</label><input class="input" id="tf-url" name="url" type="url" inputmode="url" placeholder="https://" required></div>
+      <div class="field"><label for="tf-problem">What happens between signup and first value?</label><textarea class="textarea" id="tf-problem" name="problem" placeholder="e.g. people sign up, connect nothing, and never come back" style="font-family:var(--font-ui)" required></textarea></div>
+      <p class="t-caption" id="tf-msg" role="status"></p>
+      <button class="btn btn-primary btn-lg btn-block" type="submit"${track('form-teardown')}>Request my free teardown <span class="arr">↗</span></button>
+      <p class="t-caption">This opens your email app with your details filled in, addressed to ${EMAIL}.</p>
+    </form>
+  </div>
+</section>`;
+
+  emit('/saas-activation/', page({
+    path: '/saas-activation/', title: 'SaaS Activation Sprint — Turn Trial Signups into Active Users',
+    desc: 'Onboarding redesign for B2B SaaS teams, seed to Series A. Free activation teardown, $499 Audit, 3-week Activation Sprint, or a monthly retainer.',
+    active: '/saas-activation/', nav: 'landing', navCta: { label: 'Book a call', href: CAL }, body,
+    head: '<link rel="stylesheet" href="/assets/css/home.css">\n',
+    foot: { variant: 'landing', kicker: 'Free teardown · Reply within 24 hours', title: 'Turn trials into<br><em>active</em> users.' },
+    jsonld: [{ '@context': 'https://schema.org', '@type': 'Service', name: 'SaaS Activation Sprint', provider: { '@type': 'Person', name: 'Durga Prasad', url: SITE },
+      areaServed: ['US', 'GB'], offers: [{ '@type': 'Offer', name: 'Activation Audit', price: '499', priceCurrency: 'USD' }, { '@type': 'Offer', name: 'Activation Sprint', price: '3000', priceCurrency: 'USD' }] }, faqLd(FAQ)],
+    scripts: `<script>
+(() => {
+  const form = document.getElementById('teardown-form'), msg = document.getElementById('tf-msg');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(form));
+    if (!d.name.trim() || !d.url.trim() || !d.problem.trim()) { msg.textContent = 'Please fill in all three fields.'; msg.style.color = 'var(--clr-danger)'; return; }
+    const subject = 'Free activation teardown request — ' + d.url.trim();
+    const bodyText = 'Name: ' + d.name.trim() + '\\nCompany: ' + d.url.trim() + '\\n\\nWhat happens between signup and first value:\\n' + d.problem.trim();
+    window.location.href = 'mailto:${EMAIL}?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyText);
+    msg.textContent = 'Your email app should open with the request ready to send.'; msg.style.color = 'var(--clr-success)';
+  });
+})();
+</script>\n`
+  }));
+}
+
+/* ======================================================================
    HIRE ME — freelancer profile (homepage layout + verified platform reviews)
    Figures copied from the public Upwork & Fiverr profiles (Oct 2026). No outbound links to Upwork.
    ====================================================================== */
