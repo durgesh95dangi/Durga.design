@@ -701,7 +701,7 @@ ${faqSection([
 <section class="section-md" data-checklist="${r.slug}">
   <div class="container" style="max-width:960px">
     <div class="ck-bar rv">
-      <div><p class="t-caption">Audit score</p><p class="ck-bar__score"><span data-ck-done>0</span>/${total}</p></div>
+      <div><p class="t-caption">Audit score</p><div class="ck-bar__score"><span data-ck-done>0</span>/${total}</div></div>
       <div class="ck-bar__meter" aria-hidden="true"><i></i></div>
       <div style="display:flex;gap:var(--sp-2)"><button class="btn btn-secondary btn-sm" type="button" data-ck-reset>Reset</button>${btn('Get an expert audit', '/services/ux-audit/', 'primary', 'sm')}</div>
     </div>

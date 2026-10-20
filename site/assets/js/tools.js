@@ -64,9 +64,9 @@
         <button class="btn btn-secondary" type="button" id="swap">Swap colours <span class="arr">⇄</span></button>
       </div>
       <div class="tool__out">
-        <div><p class="t-caption">Contrast ratio</p><p class="big-readout" id="ratio">—</p><p class="t-body" id="verdict" style="font-weight:600"></p></div>
+        <div><p class="t-caption">Contrast ratio</p><div class="big-readout" id="ratio">—</div><p class="t-body" id="verdict" style="font-weight:600"></p></div>
         <div class="pass-grid" id="grid"></div>
-        <div id="prev" style="border:1px solid var(--clr-border);padding:var(--sp-6)"><p style="font-family:var(--font-display);font-size:var(--text-3xl);line-height:1.1">The quick brown fox</p><p style="margin-top:var(--sp-2)">Sample body copy at a readable size, so you can judge this pair the way a user would.</p></div>
+        <div id="prev" style="border:1px solid var(--clr-border);padding:var(--sp-6)"><div style="font-family:var(--font-display);font-size:var(--text-3xl);line-height:1.1">The quick brown fox</div><div style="margin-top:var(--sp-2)">Sample body copy at a readable size, so you can judge this pair the way a user would.</div></div>
         ${code('css')}
       </div>`;
       $('#swap').addEventListener('click', () => { const a = val('fg'), b = val('bg'); $('#fg').value = b; $('#bg').value = a; $('#fg-pick').value = hexNorm(b).toLowerCase(); $('#bg-pick').value = hexNorm(a).toLowerCase(); run(); });
@@ -167,14 +167,14 @@
         ${seg('font', 'Typeface', ['Body', 'Display'], 'Body')}
         <button class="btn btn-secondary" type="button" id="auto">Suggest for this size</button>
       </div>
-      <div class="tool__out"><div id="prev" style="border:1px solid var(--clr-border);padding:var(--sp-6);max-width:100%;overflow:hidden"><p>Good rhythm makes long text easy to follow. The line height gives each line room to breathe, and the tracking keeps letters from crowding or drifting apart at large sizes.</p></div>${code('css')}</div>`;
+      <div class="tool__out"><div id="prev" style="border:1px solid var(--clr-border);padding:var(--sp-6);max-width:100%;overflow:hidden"><div class="lh-sample">Good rhythm makes long text easy to follow. The line height gives each line room to breathe, and the tracking keeps letters from crowding or drifting apart at large sizes.</div></div>${code('css')}</div>`;
       $('#auto').addEventListener('click', () => {
         const s = nval('size'), lh = s <= 14 ? 1.6 : s <= 20 ? 1.55 : s <= 32 ? 1.3 : s <= 48 ? 1.15 : 1.05, ls = s <= 14 ? .01 : s <= 24 ? 0 : s <= 48 ? -.01 : -.02;
         $('#lh').value = lh; $('#ls').value = ls; $('#lh-out').textContent = lh; $('#ls-out').textContent = ls + 'em'; run();
       });
       const run = () => {
         const s = nval('size'), lh = nval('lh'), ls = nval('ls'), disp = segVal('font') === 'Display';
-        Object.assign($('#prev p').style, { fontSize: s + 'px', lineHeight: lh, letterSpacing: ls + 'em', fontFamily: disp ? 'var(--font-display)' : 'var(--font-ui)' });
+        Object.assign($('#prev .lh-sample').style, { fontSize: s + 'px', lineHeight: lh, letterSpacing: ls + 'em', fontFamily: disp ? 'var(--font-display)' : 'var(--font-ui)' });
         setCode('css', `font-size: ${round(s / 16, 4)}rem; /* ${s}px */\nline-height: ${lh}; /* ${round(s * lh, 1)}px */\nletter-spacing: ${ls}em;`);
       };
       wire(run);
@@ -208,7 +208,7 @@
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)">${num('w2', 'Known width', 1200, 1)}${num('h2', 'Solved height', '', 1)}</div>
       </div>
       <div class="tool__out">
-        <div><p class="t-caption">Simplified ratio</p><p class="big-readout" id="ratio">16:9</p></div>
+        <div><p class="t-caption">Simplified ratio</p><div class="big-readout" id="ratio">16:9</div></div>
         <div class="stage" style="min-height:200px"><div id="box" style="background:var(--clr-accent);border:1px solid var(--clr-ink);box-shadow:var(--shadow-card);max-width:100%;max-height:180px"></div></div>
         ${code('css')}
       </div>`;
@@ -323,7 +323,7 @@
         <div class="field"><label for="list">Batch (one px value per line)</label><textarea class="textarea" id="list">4\n8\n12\n16\n24\n32\n48\n64</textarea></div>
       </div>
       <div class="tool__out">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4)"><div><p class="t-caption">rem</p><p class="big-readout" id="rem" style="font-size:var(--text-5xl)">—</p></div><div><p class="t-caption">em</p><p class="big-readout" id="em" style="font-size:var(--text-5xl)">—</p></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4)"><div><p class="t-caption">rem</p><div class="big-readout" id="rem" style="font-size:var(--text-5xl)">—</div></div><div><p class="t-caption">em</p><div class="big-readout" id="em" style="font-size:var(--text-5xl)">—</div></div></div>
         <div class="tbl-wrap"><table class="tbl"><thead><tr><th>px</th><th>rem</th><th>em</th></tr></thead><tbody id="rows"></tbody></table></div>
         ${code('css')}
       </div>`;
