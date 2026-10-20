@@ -1,0 +1,305 @@
+[
+  {
+    "slug": "dashboard-checklist",
+    "title": "B2B SaaS Dashboard Usability Checklist",
+    "desc": "Ensure your data visualization, summary metrics, and operational cards empower user action instead of cognitive fatigue.",
+    "h1": "B2B SaaS Dashboard Usability Checklist",
+    "lead": "A practical evaluation guide for software dashboards to balance high data density with effortless glanceability.",
+    "kind": "B2B SaaS Dashboard Usability Checklist",
+    "readTime": "8 min read",
+    "groups": [
+      {
+        "title": "Information Architecture & Hierarchy",
+        "items": [
+          {
+            "title": "Above-the-fold core metric cards",
+            "desc": "Are the top 3-4 vital health metrics immediately visible without scrolling?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Contextual delta badges",
+            "desc": "Does every KPI show comparison context (e.g., +12% vs last month) with color coding?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Logical reading flow",
+            "desc": "Are high-level summaries at the top and detailed tables placed below?"
+          }
+        ]
+      },
+      {
+        "title": "Visualizations & Chart Usability",
+        "items": [
+          {
+            "title": "Zero decorative chart clutter",
+            "desc": "Are 3D graphs, superfluous gradients, and decorative background lines removed?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Accessible color palettes",
+            "desc": "Can charts be distinguished by color-blind users and in grayscale?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Hover inspection tooltips",
+            "desc": "Do chart hover tooltips display precise values, timestamps, and segment names?"
+          }
+        ]
+      }
+    ],
+    "principles": [
+      "If a metric doesn't prompt an action when it turns red, it does not belong on the main dashboard view.",
+      "Never truncate numbers arbitrarily: use clear suffixes like $1.4M with full precision on hover."
+    ],
+    "faqs": [
+      {
+        "q": "How many widgets should be on a single dashboard screen?",
+        "a": "Limit primary dashboard views to no more than 6-8 core widgets. Group secondary metrics into specialized tabbed sub-views."
+      }
+    ]
+  },
+  {
+    "slug": "design-system-resources",
+    "title": "Design Token Architecture & Hand-Off Guide",
+    "desc": "The complete blueprint for structuring design tokens, naming conventions, and Tailwind configuration contracts.",
+    "h1": "Design Token Architecture & Hand-Off Guide",
+    "lead": "Learn how to build a unified design system where every Figma style maps 1:1 to Tailwind CSS classes and TypeScript tokens.",
+    "kind": "Design Token Architecture & Hand-Off Guide",
+    "readTime": "11 min read",
+    "groups": [
+      {
+        "title": "Token Layering Structure",
+        "items": [
+          {
+            "title": "Tier 1: Primitives",
+            "desc": "Raw values (e.g., obsidian-950: #090b07, lime-400: #d0ff58) with zero semantic meaning.",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Tier 2: Semantics",
+            "desc": "Contextual aliases (e.g., bg-canvas: obsidian-950, text-accent: lime-400, border-subtle).",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Tier 3: Component Tokens",
+            "desc": "Scoped component styling (e.g., btn-primary-bg, card-surface-hover)."
+          }
+        ]
+      },
+      {
+        "title": "Accessibility & Governance",
+        "items": [
+          {
+            "title": "Automated WCAG contrast check",
+            "desc": "Do all text and surface token pairs exceed 4.5:1 contrast ratios?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Explicit focus visible tokens",
+            "desc": "Are focus rings standard, high contrast, and offset from dark surfaces?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Zero arbitrary magic numbers",
+            "desc": "Are all padding, margins, and radii values locked to the 4/8px token ladder?",
+            "tag": "Critical P0"
+          }
+        ]
+      }
+    ],
+    "principles": [
+      "Tokens represent decisions, not just hex codes. Changing a token updates your entire product consistently.",
+      "Keep primitive palettes small: having 15 different shades of gray is a failure of constraint."
+    ],
+    "faqs": [
+      {
+        "q": "Should tokens be stored in Figma or code?",
+        "a": "Code is the final source of truth. We export design tokens from code (TypeScript/JSON) into Figma variables to maintain absolute parity."
+      }
+    ]
+  },
+  {
+    "slug": "ux-audit-template",
+    "title": "Heuristic Evaluation Scorecard & Template",
+    "desc": "The exact heuristic framework, severity scorecard, and presentation structure I use for $499 client audits.",
+    "h1": "Heuristic Evaluation Scorecard & Template",
+    "lead": "Evaluate your digital product through Jakob Nielsen's 10 Heuristics combined with modern SaaS behavioral psychology models.",
+    "kind": "Heuristic Evaluation Scorecard & Template",
+    "readTime": "10 min read",
+    "groups": [
+      {
+        "title": "Severity Classification Rubric",
+        "items": [
+          {
+            "title": "P0 — Blocker (Conversion Killer)",
+            "desc": "Users cannot complete transaction, signup, or primary workflow; immediate loss of revenue.",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "P1 — High Friction",
+            "desc": "Users can complete the task but experience severe hesitation, confusion, or retry loops.",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "P2 — Moderate Inconsistency",
+            "desc": "Visual drift, misalignment, or slow interaction patterns that reduce brand perceived trust."
+          },
+          {
+            "title": "P3 — Low Cosmetic",
+            "desc": "Minor typographic or spacing imperfections that do not impair workflow completion."
+          }
+        ]
+      },
+      {
+        "title": "Core Heuristic Categories Tested",
+        "items": [
+          {
+            "title": "Visibility of System Status",
+            "desc": "Does the system always keep users informed about what is going on through appropriate feedback?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Match Between System and Real World",
+            "desc": "Does the interface speak the user's language rather than internal engineering database terms?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "User Control and Freedom",
+            "desc": "Do users have clear emergency exits to leave unwanted states without an extended dialogue?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Error Prevention Over Error Messages",
+            "desc": "Does the design eliminate error-prone conditions before they occur?",
+            "tag": "Critical P0"
+          }
+        ]
+      }
+    ],
+    "principles": [
+      "Always prioritize P0 conversion blockers before spending time polishing minor P3 styling details.",
+      "Record your audit walkthrough via video: hearing vocal hesitation illustrates friction far better than static screenshots."
+    ],
+    "faqs": [
+      {
+        "q": "Can I use this template to audit my own product?",
+        "a": "Yes, though founders often suffer from 'creator blindness'. Having an external expert walk through your flow uncovers assumptions you take for granted."
+      }
+    ]
+  },
+  {
+    "slug": "ux-checklist",
+    "title": "50-Point SaaS UX Launch & Audit Checklist",
+    "desc": "A battle-tested 50-point checklist covering onboarding, navigation, tables, forms, and mobile heuristics for SaaS founders and engineers.",
+    "h1": "50-Point SaaS UX Launch & Audit Checklist",
+    "lead": "Before deploying your next release or product launch, run your screens through this exhaustive checklist to catch silent conversion killers and usability traps.",
+    "kind": "50-Point SaaS UX Launch & Audit Checklist",
+    "readTime": "12 min read",
+    "groups": [
+      {
+        "title": "Onboarding & Account Activation",
+        "items": [
+          {
+            "title": "Single-field initial signup",
+            "desc": "Is signup reduced to just email and password without upfront company size or role questions?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Sub-3-minute Time-to-Value",
+            "desc": "Can a user experience the core product value before seeing a billing prompt?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Interactive starter templates",
+            "desc": "Are new accounts pre-populated with realistic sample data instead of blank empty states?"
+          },
+          {
+            "title": "Deferred workspace invites",
+            "desc": "Is team member invitation suggested AFTER the initial user experiences value?"
+          }
+        ]
+      },
+      {
+        "title": "Navigation & Wayfinding",
+        "items": [
+          {
+            "title": "Active route highlighting",
+            "desc": "Does the sidebar or navbar clearly indicate the current screen with high contrast?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Breadcrumb hierarchy",
+            "desc": "Can users traverse 2+ levels deep back to parent collections with 1 click?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Global search (Cmd + K)",
+            "desc": "Is keyboard-navigable search available across entities and settings?"
+          },
+          {
+            "title": "Back button fidelity",
+            "desc": "Does clicking browser back return to the previous view without resetting active filters?",
+            "tag": "Critical P0"
+          }
+        ]
+      },
+      {
+        "title": "Forms, Inputs & Error States",
+        "items": [
+          {
+            "title": "Inline validation on blur",
+            "desc": "Do inputs validate after the user unfocuses rather than waiting for form submission?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Destructive action confirmation",
+            "desc": "Do deletions require explicit typed confirmation or 2-step modal prompts?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Autofocus on primary input",
+            "desc": "Does the first form input receive focus automatically upon screen load?"
+          },
+          {
+            "title": "Helpful error recovery copy",
+            "desc": "Do error messages explain HOW to fix the issue instead of just saying 'Invalid input'?",
+            "tag": "Critical P0"
+          }
+        ]
+      },
+      {
+        "title": "Data Tables & High-Density Views",
+        "items": [
+          {
+            "title": "Sticky header rows",
+            "desc": "Do table column headers remain visible during vertical scrolling?",
+            "tag": "Critical P0"
+          },
+          {
+            "title": "Visible sorting indicators",
+            "desc": "Is active sort column and direction clearly badged with SVG arrows?"
+          },
+          {
+            "title": "Clear filter badge counts",
+            "desc": "Does the filter trigger display active filter count and 1-click 'Clear All'?"
+          },
+          {
+            "title": "Row hover contrast",
+            "desc": "Do table rows highlight clearly on hover for scannability?"
+          }
+        ]
+      }
+    ],
+    "principles": [
+      "Fixing onboarding friction yields 3x higher impact on ARR than tweaking checkout button colors.",
+      "Never present a user with an empty state without an immediate primary action to populate it.",
+      "Make destructive actions hard to trigger accidentally, but trivial to undo."
+    ],
+    "faqs": [
+      {
+        "q": "How often should my team review this checklist?",
+        "a": "Run this checklist before any major product version launch, or at the end of each monthly development cycle."
+      }
+    ]
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "ai-ux",
+    "title": "AI UX Masterclasses & Articles",
+    "desc": "Moving beyond chat boxes to design contextual copilots, explainable AI workflows, and confidence heuristics.",
+    "h1": "AI UX: Copilot Ergonomics & Generative UI Patterns",
+    "lead": "Moving beyond chat boxes to design contextual copilots, explainable AI workflows, and confidence heuristics.",
+    "label": "AI UX"
+  },
+  {
+    "slug": "design-systems",
+    "title": "Design Systems Masterclasses & Articles",
+    "desc": "Scaling UI consistency from Figma styles to production Tailwind/React tokens with zero design drift.",
+    "h1": "Design Systems: Tokens, Component Governance & Code Parity",
+    "lead": "Scaling UI consistency from Figma styles to production Tailwind/React tokens with zero design drift.",
+    "label": "Design Systems"
+  },
+  {
+    "slug": "fintech-ux",
+    "title": "Fintech UX Masterclasses & Articles",
+    "desc": "Designing financial interfaces that reassure users, eliminate transaction anxiety, and collapse checkout friction.",
+    "h1": "Fintech UX: Trust, Compliance & Transaction Heuristics",
+    "lead": "Designing financial interfaces that reassure users, eliminate transaction anxiety, and collapse checkout friction.",
+    "label": "Fintech UX"
+  },
+  {
+    "slug": "product-design",
+    "title": "Product Design Masterclasses & Articles",
+    "desc": "Principles of modern product strategy, interaction costs, and building software that respects human momentum.",
+    "h1": "Product Design: 0-to-1 Architecture & Mental Models",
+    "lead": "Principles of modern product strategy, interaction costs, and building software that respects human momentum.",
+    "label": "Product Design"
+  },
+  {
+    "slug": "saas-ux",
+    "title": "SaaS UX Masterclasses & Articles",
+    "desc": "Battle-tested UX insights on reducing churn, designing multi-tenant B2B apps, and accelerating user activation.",
+    "h1": "SaaS UX: Workflows, Time-to-Value & Onboarding Architecture",
+    "lead": "Battle-tested UX insights on reducing churn, designing multi-tenant B2B apps, and accelerating user activation.",
+    "label": "SaaS UX"
+  },
+  {
+    "slug": "ux-research",
+    "title": "UX Research Masterclasses & Articles",
+    "desc": "Uncovering the silent friction killers that analytics miss through customer interviews and usability audits.",
+    "h1": "UX Research: Heuristic Evaluation & Cognitive Psychology",
+    "lead": "Uncovering the silent friction killers that analytics miss through customer interviews and usability audits.",
+    "label": "UX Research"
+  },
+  {
+    "slug": "ux-teardowns",
+    "title": "UX Teardowns Masterclasses & Articles",
+    "desc": "Surgical breakdowns of real SaaS and fintech applications, showing exactly what broke and how to fix it.",
+    "h1": "UX Teardowns: Screen-by-Screen Funnel & Conversion Audits",
+    "lead": "Surgical breakdowns of real SaaS and fintech applications, showing exactly what broke and how to fix it.",
+    "label": "UX Teardowns"
+  }
+]

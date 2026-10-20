@@ -1,0 +1,244 @@
+[
+  {
+    "slug": "ai-insurance",
+    "title": "Insurtech Global — Enterprise AI Insurance Claims & Underwriting Copilot | Case Study",
+    "desc": "Architected an AI-native workspace for commercial insurance adjusters that analyzes damage photos, extracts policy coverage clauses, and drafts settlement recommendations.",
+    "client": "Insurtech Global",
+    "category": "AI",
+    "platform": "Web SaaS Platform",
+    "h1": "Enterprise AI Insurance Claims & Underwriting Copilot",
+    "summary": "Architected an AI-native workspace for commercial insurance adjusters that analyzes damage photos, extracts policy coverage clauses, and drafts settlement recommendations.",
+    "impact": "Claims triage time reduced from 45 min → 8 min",
+    "cover": "/assets/media/images/pureblue-ai.webp",
+    "challenge": "Claims adjusters were overwhelmed by 200-page policy PDFs and hundreds of field inspection photos. Adjusters were skeptical of automated AI tools because 'black box' scores did not show the underlying legal evidence, risking massive compliance penalties.",
+    "decisions": [
+      {
+        "title": "Lack of Explainability",
+        "problem": "Adjusters refused to approve automated claim payouts without seeing the source clause.",
+        "solution": "Engineered split-screen citation views linking every AI claim summary directly to highlighted PDF paragraphs."
+      },
+      {
+        "title": "All-or-Nothing Automation",
+        "problem": "Systems forced adjusters to accept the entire machine prediction or retype everything manually.",
+        "solution": "Built granular inline diff controls allowing adjusters to accept, edit, or reject individual line items."
+      },
+      {
+        "title": "High-Stakes Error Anxiety",
+        "problem": "Adjusters feared liability if an AI hallucination miscalculated payout caps.",
+        "solution": "Designed visual confidence badges: green for clear policy matches, amber for subjective ambiguity."
+      }
+    ],
+    "results": [
+      {
+        "value": "82%",
+        "label": "Reduction in average claim processing and review duration"
+      },
+      {
+        "value": "99.4%",
+        "label": "Compliance audit accuracy verified by internal underwriting teams"
+      }
+    ],
+    "quote": {
+      "text": "Durga designed our copilot with so much transparency that even our most skeptical senior underwriters adopted it within days.",
+      "author": "Chief Product Officer",
+      "role": "Enterprise Insurtech · Insurtech Global"
+    },
+    "duration": "7 Weeks"
+  },
+  {
+    "slug": "dhani",
+    "title": "Dhani — 50M+ User Mobile Bill Payment Redesign | Case Study",
+    "desc": "Transformed a disjointed, high-friction bill payment funnel into an intelligent 2-tap checkout system for one of India's largest consumer fintech and neobanking platforms.",
+    "client": "Dhani",
+    "category": "Fintech",
+    "platform": "Mobile Application (iOS & Android)",
+    "duration": "6 Weeks",
+    "h1": "50M+ User Mobile Bill Payment Redesign",
+    "summary": "Transformed a disjointed, high-friction bill payment funnel into an intelligent 2-tap checkout system for one of India's largest consumer fintech and neobanking platforms.",
+    "impact": "8 steps collapsed to 2 taps for 50 Million users",
+    "cover": "/assets/media/images/dhani_app_v2.png",
+    "challenge": "Dhani's utility bill payment section suffered from severe cart abandonment. Users had to re-enter customer IDs, choose billers from unorganized 80-item lists, select payment modes manually, and wait through ambiguous OTP verification screens, leading to a 34% drop-off rate.",
+    "decisions": [
+      {
+        "title": "Biller Selection Paralysis",
+        "problem": "Users had to manually search through dozens of municipal electricity boards every single month.",
+        "solution": "Architected Smart Due Cards on the home screen that fetch pending bills automatically via API."
+      },
+      {
+        "title": "Checkout Friction",
+        "problem": "Selecting payment sources required 4 sequential modal choices (Wallet, Card, UPI, BNPL).",
+        "solution": "Collapsed all payment methods into a unified swipe-to-pay sheet with preferred defaults."
+      },
+      {
+        "title": "Payment Latency Anxiety",
+        "problem": "Delayed banking webhooks showed generic spinning wheels, causing double debits.",
+        "solution": "Introduced clear escrow confirmation receipts with real-time status tracker and reversal guarantee."
+      }
+    ],
+    "results": [
+      {
+        "value": "8 → 2",
+        "label": "Steps required for repeat utility payments collapsed from 8 to 2 taps"
+      },
+      {
+        "value": "+42%",
+        "label": "Increase in recurring monthly bill payments within the first 60 days"
+      },
+      {
+        "value": "50M+",
+        "label": "App users actively interacting with the redesigned financial flows"
+      }
+    ],
+    "quote": {
+      "text": "Durga simplified our bill payment flows so effectively that our repeat transaction metrics surged immediately after release.",
+      "author": "Dhani Product Team",
+      "role": "VP of Product · Dhani"
+    }
+  },
+  {
+    "slug": "eyeontask",
+    "title": "EyeOnTask — Field Service Management SaaS Redesign | Case Study",
+    "desc": "Redesigned the complete dispatcher dashboard and mobile field worker application for an international FSM platform serving 1,000+ service companies across 26 countries.",
+    "client": "EyeOnTask",
+    "category": "B2B SaaS",
+    "platform": "Web Dashboard, iOS & Android",
+    "duration": "3 Months",
+    "h1": "Field Service Management SaaS Redesign",
+    "summary": "Redesigned the complete dispatcher dashboard and mobile field worker application for an international FSM platform serving 1,000+ service companies across 26 countries.",
+    "impact": "Churn dropped from 28% → 13% | Rating 2.8★ → 4.4★",
+    "cover": "/assets/media/assets/img/eyeontask-dashboard-new.png",
+    "challenge": "Dispatchers spent up to 12 minutes creating a single emergency work order due to deeply nested tabs and cluttered form inputs. Field workers in low-connectivity areas frequently lost job completion signatures, resulting in negative Play Store reviews (2.8★) and rising churn.",
+    "decisions": [
+      {
+        "title": "Dispatch Calendar Gridlock",
+        "problem": "Dispatchers could not see technician geographic status and skill tags simultaneously.",
+        "solution": "Engineered a drag-and-drop dual timeline showing real-time GPS proximity and availability slots."
+      },
+      {
+        "title": "Offline Sync Vulnerabilities",
+        "problem": "Technicians lost job notes and customer signatures if cell service dropped in basements.",
+        "solution": "Designed optimistic offline states with persistent local caching and auto-sync queue badges."
+      },
+      {
+        "title": "Invoicing Disconnect",
+        "problem": "Completed jobs took days to reconcile into QuickBooks and Xero.",
+        "solution": "Built a 1-click invoice generator directly in the job completion summary with line-item editing."
+      }
+    ],
+    "results": [
+      {
+        "value": "28% → 13%",
+        "label": "Annual customer churn reduction within 6 months of rollout"
+      },
+      {
+        "value": "2.8★ → 4.4★",
+        "label": "Google Play Store rating surge across mobile field technicians"
+      },
+      {
+        "value": "65%",
+        "label": "Faster emergency job creation for dispatchers (12m → 4m)"
+      }
+    ],
+    "quote": {
+      "text": "Durga redesigned our entire platform without missing a single engineering sprint. The churn reduction spoke for itself.",
+      "author": "EyeOnTask Leadership",
+      "role": "Operations Director · EyeOnTask"
+    }
+  },
+  {
+    "slug": "pureblue",
+    "title": "Pureblue.ai — Real-Time AI Operational Analytics Dashboard | Case Study",
+    "desc": "Designed the flagship analytics workspace for Pureblue.ai, enabling operations leaders to monitor IoT and operational data streams and take automated corrective actions.",
+    "client": "Pureblue.ai",
+    "category": "AI",
+    "platform": "Web SaaS Dashboard",
+    "h1": "Real-Time AI Operational Analytics Dashboard",
+    "summary": "Designed the flagship analytics workspace for Pureblue.ai, enabling operations leaders to monitor IoT and operational data streams and take automated corrective actions.",
+    "impact": "Real-time anomaly detection across 100,000+ data streams",
+    "cover": "/assets/media/images/saas-dashboard.jpg",
+    "challenge": "Operations teams were experiencing critical alarm fatigue: hundreds of flashing notifications caused operators to miss the 2 or 3 critical system failures that actually required physical intervention.",
+    "decisions": [
+      {
+        "title": "Alarm Fatigue & Visual Noise",
+        "problem": "Dashboards showed all alerts with identical visual weight, overwhelming operators.",
+        "solution": "Created an intelligent severity-weighted visual feed that groups correlated telemetry events."
+      },
+      {
+        "title": "Complex Querying Syntax",
+        "problem": "Filtering telemetry data required writing custom SQL queries that slowed frontline managers.",
+        "solution": "Designed a conversational natural-language query bar paired with visual facet filters."
+      },
+      {
+        "title": "Delayed Root-Cause Analysis",
+        "problem": "Investigating an anomaly required switching between 6 disparate telemetry tools.",
+        "solution": "Built unified modal drill-downs showing time-series charts, affected hardware IDs, and recommended fixes."
+      }
+    ],
+    "results": [
+      {
+        "value": "75%",
+        "label": "Reduction in critical anomaly resolution time across plant operations"
+      },
+      {
+        "value": "100%",
+        "label": "Adoption across all pilot enterprise deployment facilities"
+      }
+    ],
+    "quote": {
+      "text": "The interface Durga delivered made our complex algorithms simple and actionable. Our customers couldn't stop praising the dashboard.",
+      "author": "Pureblue Founder",
+      "role": "CEO · Pureblue.ai"
+    },
+    "duration": "5 Weeks"
+  },
+  {
+    "slug": "vilcart",
+    "title": "Vilcart — Rural-First B2B E-Commerce Mobile App | Case Study",
+    "desc": "Designed a rural-first mobile shopping and inventory replenishment app for rural grocery store owners (Kirana stores) in tier-3 villages across South India.",
+    "client": "Vilcart",
+    "category": "E-Commerce",
+    "platform": "Android Mobile Application",
+    "duration": "2 Months",
+    "h1": "Rural-First B2B E-Commerce Mobile App",
+    "summary": "Designed a rural-first mobile shopping and inventory replenishment app for rural grocery store owners (Kirana stores) in tier-3 villages across South India.",
+    "impact": "4.5★ App Store Rating across 5,000+ Village Retailers",
+    "cover": "/assets/media/images/vilcart/vilcart-cover.jpg",
+    "challenge": "Village shop owners have low digital literacy, operate on slow 2G/3G networks, and do not understand Western e-commerce patterns (like shopping cart icons and credit cards). Previous attempts by enterprise suppliers failed due to cognitive friction and English-only menus.",
+    "decisions": [
+      {
+        "title": "Language & Literacy Barrier",
+        "problem": "Text-heavy search and catalog categories prevented non-English speaking retailers from ordering.",
+        "solution": "Implemented large photographic product tiles with vernacular Kannada and Hindi voice assistance."
+      },
+      {
+        "title": "Payment Distrust",
+        "problem": "Village retailers adamantly refused upfront online card payments.",
+        "solution": "Made Cash-on-Delivery (COD) and Credit Line (Khata) the prominent primary payment methods."
+      },
+      {
+        "title": "Low Bandwidth Constraints",
+        "problem": "High-resolution product galleries timed out on village cellular towers.",
+        "solution": "Optimized interface with aggressive vector icon sets, cached catalog bundles, and offline carts."
+      }
+    ],
+    "results": [
+      {
+        "value": "4.5★",
+        "label": "Customer satisfaction rating on the Google Play Store with thousands of reviews"
+      },
+      {
+        "value": "85%",
+        "label": "Repeat weekly order rate amongst rural grocery retailers"
+      },
+      {
+        "value": "100%",
+        "label": "Low-bandwidth fault tolerance for offline inventory selection"
+      }
+    ],
+    "quote": {
+      "text": "Durga went beyond textbook UI design. He understood the ground reality of village shop owners and built an app they genuinely love.",
+      "author": "Vilcart Founders",
+      "role": "Executive Team · Vilcart"
+    }
+  }
+]

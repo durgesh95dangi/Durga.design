@@ -1,0 +1,310 @@
+[
+  {
+    "slug": "design-partner",
+    "title": "DesignStream — Ongoing Design Partner | Product Design Services by Durga Prasad",
+    "desc": "Your dedicated senior product designer on an agile monthly subscription. Pause anytime.",
+    "badge": "Flexible Monthly Partnership",
+    "duration": "DesignStream — Ongoing Design Partner",
+    "price": "Starting at $999/mo",
+    "h1": "DesignStream — Ongoing Design Partner",
+    "lead": "Your dedicated senior product designer on an agile monthly subscription. Pause anytime.",
+    "body": "Skip the overhead, slow hiring, and salary expenses of a full-time senior designer or slow agency contracts. Get unlimited design requests delivered one at a time with rapid 24-48 hour turnarounds, daily async communication, and zero long-term commitments.",
+    "ctas": [
+      {
+        "label": "View Subscription Plans",
+        "href": "/subscription"
+      },
+      {
+        "label": "Book a 15-Min Discovery Call",
+        "href": "https://cal.com/dpdangi/15min"
+      }
+    ],
+    "ideal": [
+      "Early and growth-stage startups needing continuous design execution",
+      "Founders who want direct access to a senior designer without junior delegation",
+      "Teams that need the flexibility to pause design spend during slow development months"
+    ],
+    "process": [
+      {
+        "title": "Instant Onboarding",
+        "text": "Get set up on your private Trello board and Slack channel in under 24 hours."
+      },
+      {
+        "title": "Queue Tasks",
+        "text": "Add as many design tasks as you want. I tackle them one by one in priority order."
+      },
+      {
+        "title": "Fast Turnaround",
+        "text": "Receive production designs in 24 to 48 hours on average with Loom walkthroughs."
+      },
+      {
+        "title": "Unlimited Revisions",
+        "text": "We refine every screen until you and your engineering team are 100% satisfied."
+      }
+    ],
+    "deliverables": [
+      "Unlimited UX and UI Design Requests (Trello/Notion queue)",
+      "Feature Iterations, Dashboard Views, & Onboarding Screens",
+      "Marketing Landing Pages & Conversion Assets",
+      "Figma Design System Maintenance & Component Updates"
+    ],
+    "outcomes": [
+      "Total agility: scale your design capacity up or down as product roadmap shifts",
+      "Direct senior-level craftsmanship with no account managers in the middle",
+      "Flat, predictable monthly expense with zero surprise billing"
+    ],
+    "faqs": [
+      {
+        "q": "How does the pause feature work?",
+        "a": "Billing cycles are based on a 31-day period. If you use 20 days and pause, you have 11 remaining days banked to use whenever your next sprint starts."
+      },
+      {
+        "q": "How many requests can I submit at once?",
+        "a": "You can add unlimited requests to your queue. They will be actively designed and delivered one by one in your chosen priority sequence."
+      }
+    ],
+    "cta": {
+      "title": "Ready to get started?",
+      "text": "Take the first step toward reducing friction and accelerating product growth.",
+      "ctas": [
+        {
+          "label": "View Subscription Plans",
+          "href": "/subscription"
+        },
+        {
+          "label": "Book a Discovery Call",
+          "href": "https://cal.com/dpdangi/15min"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "product-redesign",
+    "title": "Legacy Product Redesign & Modernization | Product Design Services by Durga Prasad",
+    "desc": "Rescue complex enterprise platforms from UX debt and declining conversion metrics.",
+    "badge": "For Established Products",
+    "duration": "4 to 8 Weeks",
+    "price": "Milestone-Based",
+    "h1": "Legacy Product Redesign & Modernization",
+    "lead": "Rescue complex enterprise platforms from UX debt and declining conversion metrics.",
+    "body": "Legacy software often accumulates years of disjointed features, outdated design paradigms, and confusing navigation. I surgically restructure the interface without alienating power users, modernizing the visual layer while dramatically increasing operational velocity.",
+    "ctas": [
+      {
+        "label": "Schedule Redesign Call",
+        "href": "https://cal.com/dpdangi/15min"
+      },
+      {
+        "label": "Book a 15-Min Discovery Call",
+        "href": "https://cal.com/dpdangi/15min"
+      }
+    ],
+    "ideal": [
+      "Platforms suffering from customer churn citing 'clunky or confusing' interfaces",
+      "Products built by engineers that have outgrown their initial quick UI",
+      "Companies undergoing rebranding or expanding into enterprise sales tiers"
+    ],
+    "process": [
+      {
+        "title": "Current State Audit",
+        "text": "Pinpoint every bottleneck causing user frustration and support tickets."
+      },
+      {
+        "title": "Workflow Simplification",
+        "text": "Consolidate redundant screens, reduce click counts, and streamline data entry."
+      },
+      {
+        "title": "Modern Design Overhaul",
+        "text": "Introduce clean typography, balanced contrast, and modern design tokens."
+      },
+      {
+        "title": "Phased Rollout Support",
+        "text": "Support engineering through beta testing, user feedback, and final launch."
+      }
+    ],
+    "deliverables": [
+      "Full Product UX Heuristic Evaluation & Pain-Point Map",
+      "Consolidated Navigation & Layout Restructure",
+      "Complete Modernized UI Screen Suite across Desktop & Mobile",
+      "Component Migration Strategy to minimize frontend engineering friction"
+    ],
+    "outcomes": [
+      "Immediate decrease in customer support onboarding and navigation tickets",
+      "Renewed customer delight and positive sentiment across review platforms",
+      "Higher conversion from trial to paid accounts"
+    ],
+    "faqs": [
+      {
+        "q": "How do we prevent power users from rebelling against changes?",
+        "a": "We preserve keyboard shortcuts, respect existing mental models, and roll out improvements progressively with clear in-app change highlights."
+      }
+    ],
+    "cta": {
+      "title": "Ready to get started?",
+      "text": "Take the first step toward reducing friction and accelerating product growth.",
+      "ctas": [
+        {
+          "label": "Schedule Redesign Call",
+          "href": "https://cal.com/dpdangi/15min"
+        },
+        {
+          "label": "Book a Discovery Call",
+          "href": "https://cal.com/dpdangi/15min"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "saas-product-design",
+    "title": "0-to-1 SaaS Product Design | Product Design Services by Durga Prasad",
+    "desc": "Architecting high-converting, intuitive software from scratch for founders and innovators.",
+    "badge": "For Founders Launching New Products",
+    "duration": "3 to 6 Weeks",
+    "price": "Project-Based or Retainer",
+    "h1": "0-to-1 SaaS Product Design",
+    "lead": "Architecting high-converting, intuitive software from scratch for founders and innovators.",
+    "body": "Transform your product vision and technical architecture into a polished, market-ready web application. I design end-to-end user journeys, navigation paradigms, responsive UI views, and interactive prototypes tested with real customers.",
+    "ctas": [
+      {
+        "label": "Discuss Your Product",
+        "href": "https://cal.com/dpdangi/15min"
+      },
+      {
+        "label": "Book a 15-Min Discovery Call",
+        "href": "https://cal.com/dpdangi/15min"
+      }
+    ],
+    "ideal": [
+      "Founders with validated problem spaces ready to build an MVP or V1 platform",
+      "Technical founders who need world-class product design to attract enterprise customers",
+      "Companies expanding from a single tool into an interconnected platform ecosystem"
+    ],
+    "process": [
+      {
+        "title": "Discovery & Logic",
+        "text": "We map out user personas, business rules, and technical data schemas."
+      },
+      {
+        "title": "Wireframes & Flows",
+        "text": "Low-fidelity structural maps ensuring workflow efficiency before visual styling."
+      },
+      {
+        "title": "High-Fidelity UI",
+        "text": "Pixel-perfect visual design using your brand identity and dark/light modes."
+      },
+      {
+        "title": "Prototype & Handoff",
+        "text": "Interactive Figma prototype and annotated developer specs for rapid build."
+      }
+    ],
+    "deliverables": [
+      "Complete Information Architecture & User Flow Mapping",
+      "Full Web Application UI (Dashboards, Tables, Forms, Settings, Billing)",
+      "Interactive Clickable Figma Prototype for User Testing & Investor Demos",
+      "Production-Ready Design System with React/Tailwind Tokens"
+    ],
+    "outcomes": [
+      "A flagship product that stands head-and-shoulders above legacy competitors",
+      "Drastically reduced engineering rework due to clear, edge-case tested specs",
+      "Investor-ready clickable prototypes that validate market demand"
+    ],
+    "faqs": [
+      {
+        "q": "Can you collaborate directly with our engineers in Slack?",
+        "a": "Yes. I work embedded within your sprint cycles via Slack, Figma comments, and asynchronous Loom updates."
+      }
+    ],
+    "cta": {
+      "title": "Ready to get started?",
+      "text": "Take the first step toward reducing friction and accelerating product growth.",
+      "ctas": [
+        {
+          "label": "Discuss Your Product",
+          "href": "https://cal.com/dpdangi/15min"
+        },
+        {
+          "label": "Book a Discovery Call",
+          "href": "https://cal.com/dpdangi/15min"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ux-audit",
+    "title": "Surgical SaaS & Fintech UX Audit | Product Design Services by Durga Prasad",
+    "desc": "Discover exactly where users abandon your product and how to fix it within 36 hours.",
+    "badge": "Most Popular for Growth Founders",
+    "duration": "36 Hours",
+    "price": "$499 Flat Fee",
+    "h1": "Surgical SaaS & Fintech UX Audit",
+    "lead": "Discover exactly where users abandon your product and how to fix it within 36 hours.",
+    "body": "A comprehensive, no-fluff teardown of your critical conversion paths, onboarding friction, and core product workflows. You receive a recorded Loom video walkthrough, prioritized heuristic scorecard, and actionable Figma wireframe fixes.",
+    "ctas": [
+      {
+        "label": "Book UX Audit for $499",
+        "href": "/ux-audit"
+      },
+      {
+        "label": "Book a 15-Min Discovery Call",
+        "href": "https://cal.com/dpdangi/15min"
+      }
+    ],
+    "ideal": [
+      "Post-revenue SaaS & Fintech platforms with unexplained user churn",
+      "Founders pouring capital into ads that fail to convert on landing or signup",
+      "Teams preparing for a major funding round or growth sprint"
+    ],
+    "process": [
+      {
+        "title": "Access & Context",
+        "text": "You share test credentials, target user profiles, and product analytics."
+      },
+      {
+        "title": "Heuristic Teardown",
+        "text": "I test every screen through the lens of cognitive load, interaction cost, and mental models."
+      },
+      {
+        "title": "Figma Fixes & Video",
+        "text": "I redesign the broken screens in Figma and record a comprehensive breakdown."
+      },
+      {
+        "title": "Debrief Call",
+        "text": "We meet on Zoom/Google Meet to answer engineer questions and ensure seamless implementation."
+      }
+    ],
+    "deliverables": [
+      "45+ minute screen-by-screen Loom video walkthrough",
+      "Prioritized heuristic evaluation spreadsheet (Impact vs. Effort)",
+      "Production-ready Figma wireframes solving top 3 friction leaks",
+      "30-minute 1-on-1 strategy call to review implementation roadmap"
+    ],
+    "outcomes": [
+      "Immediate clarity on why users bounce during onboarding",
+      "Engineering-ready blueprints that developers can execute immediately",
+      "Backed by a 100% 30-day money-back satisfaction guarantee"
+    ],
+    "faqs": [
+      {
+        "q": "What do you need from my team to get started?",
+        "a": "A link to your staging or production app, test login credentials, and a quick summary of your target ICP and core conversion goal."
+      },
+      {
+        "q": "Do my developers have to rewrite the entire app?",
+        "a": "No. The audit specifically identifies high-impact, low-effort changes (microcopy, button placement, default states, form simplification) that can be deployed quickly."
+      }
+    ],
+    "cta": {
+      "title": "Ready to get started?",
+      "text": "Take the first step toward reducing friction and accelerating product growth.",
+      "ctas": [
+        {
+          "label": "Book UX Audit for $499",
+          "href": "/ux-audit"
+        },
+        {
+          "label": "Book a Discovery Call",
+          "href": "https://cal.com/dpdangi/15min"
+        }
+      ]
+    }
+  }
+]

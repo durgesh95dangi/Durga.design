@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Durga — Product Designer for Fintech &amp; B2B SaaS</title>
+<meta name="description" content="Durga is a senior UI/UX and product designer with 8+ years designing fintech and B2B SaaS products for teams like Vestas, Dhani and EyeOnTask.">
+<meta property="og:title" content="Durga — Product Designer for Fintech & B2B SaaS">
+<meta property="og:description" content="8+ years crafting software people can use without a manual.">
+<meta property="og:image" content="/assets/portrait.jpg">
+<meta name="theme-color" content="#F5F2EE">
+<link rel="icon" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/ds.css">
+<style>
+/* Homepage-only: hero composition */
+.hero{padding-top:calc(var(--nav-height) + var(--sp-8));padding-bottom:var(--sp-16)}
+.hero__frame{position:relative;border:1px solid var(--clr-border);background:var(--clr-surface);padding:var(--sp-24) var(--sp-6) var(--sp-16);text-align:center;overflow:hidden}
+@media(min-width:768px){.hero__frame{padding:var(--sp-32) var(--sp-12) var(--sp-20)}}
+.hero__grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--clr-bg-alt) 1px,transparent 1px),linear-gradient(90deg,var(--clr-bg-alt) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at center,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at center,#000 10%,transparent 70%);opacity:.7}
+.hero__frame > *:not(.hero__grid){position:relative}
+.hero__top{position:absolute !important;top:var(--sp-6);left:var(--sp-6);right:var(--sp-6);display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4)}
+.hero__time{font-size:var(--text-xs);color:var(--clr-ink-3);font-variant-numeric:tabular-nums}
+@media(max-width:540px){.hero__time{display:none}}
+.hero__hello{font-size:var(--text-sm);color:var(--clr-ink-3);margin-bottom:var(--sp-4)}
+.hero__hello b{color:var(--clr-ink);font-weight:600}
+.hero__headline{margin-inline:auto}
+@media(min-width:768px){.hero__headline .rise > span{white-space:nowrap}}
+@media(max-width:767px){.hero__headline{font-size:clamp(44px,13vw,64px)}}
+.face{display:inline-block;vertical-align:middle;width:.82em;aspect-ratio:1/1;margin-inline:.08em;overflow:hidden;border:1.5px solid var(--clr-ink);box-shadow:var(--shadow-sm);position:relative;top:-.06em;transition:transform var(--dur-slow) var(--ease-spring),box-shadow var(--dur-base) var(--ease-out)}
+.face img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:grayscale(1);transition:filter var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+.face:hover{transform:rotate(-4deg) scale(1.06);box-shadow:var(--shadow-accent)}
+.face:hover img{filter:grayscale(0);transform:scale(1.06)}
+.hero__sub{max-width:56ch;margin:var(--sp-8) auto var(--sp-10)}
+.hero__actions{display:flex;justify-content:center;flex-wrap:wrap;gap:var(--sp-4)}
+.hero__meta{margin-top:var(--sp-12);display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:var(--sp-6);font-size:var(--text-sm);color:var(--clr-ink-3)}
+.hero__meta .stars{color:var(--clr-ink);letter-spacing:2px}
+.hero__meta .sep{width:1px;height:16px;background:var(--clr-border)}
+.badge{position:absolute !important;width:112px;height:112px;left:var(--sp-8);bottom:var(--sp-8);display:grid;place-items:center}
+.badge svg{position:absolute;inset:0;animation:spin 14s linear infinite}
+.badge text{font-family:var(--font-ui);font-size:10.4px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;fill:var(--clr-ink)}
+.badge__core{width:44px;height:44px;background:var(--clr-ink);color:var(--clr-ink-inv);display:grid;place-items:center;font-size:var(--text-lg);transition:background var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-spring)}
+.badge:hover .badge__core{background:var(--clr-accent);transform:rotate(45deg)}
+.badge:hover svg{animation-duration:5s}
+@media(max-width:900px){.badge{display:none}}
+.spark{position:absolute !important;right:7%;top:16%;width:28px;color:var(--clr-accent);animation:twinkle 3.2s var(--ease-out) infinite}
+@keyframes twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.7) rotate(45deg)}}
+@media(max-width:767px){.spark{display:none}}
+.logos{display:flex;align-items:center;gap:var(--sp-8);border-block:1px solid var(--clr-border);padding-block:var(--sp-6);margin-top:var(--sp-12)}
+.logos__label{flex:none;font-size:var(--text-xs);font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--clr-ink-3);max-width:12ch;line-height:1.4}
+.logos img{height:28px;width:auto;filter:grayscale(1);opacity:.6;mix-blend-mode:multiply;transition:filter var(--dur-base) var(--ease-out),opacity var(--dur-base) var(--ease-out)}
+.logos img:hover{filter:grayscale(0);opacity:1}
+.logos .wordmark{font-family:var(--font-display);font-size:var(--text-2xl);color:var(--clr-ink-3);white-space:nowrap}
+.about{display:grid;gap:var(--sp-12);align-items:start}
+@media(min-width:900px){.about{grid-template-columns:5fr 7fr;gap:var(--sp-16)}}
+.portrait{position:relative;border:1px solid var(--clr-ink);box-shadow:var(--shadow-xl);overflow:hidden;aspect-ratio:4/5;background:var(--clr-bg-alt)}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;transform:scale(1.08);transition:transform 1.2s var(--ease-out)}
+.portrait.in img{transform:none}
+.portrait__tag{position:absolute;left:var(--sp-4);bottom:var(--sp-4);background:var(--clr-surface);border:1px solid var(--clr-ink);padding:var(--sp-2) var(--sp-3);font-size:var(--text-xs);font-weight:600;display:flex;gap:var(--sp-2);align-items:center}
+.about__quote{font-family:var(--font-display);font-size:clamp(var(--text-2xl),3vw,var(--text-4xl));line-height:1.2;letter-spacing:-.01em;margin-bottom:var(--sp-6)}
+.about__quote em{color:var(--clr-accent)}
+.about__body{max-width:60ch;margin-bottom:var(--sp-10)}
+@media(min-width:900px){.work-grid > :nth-child(4n+2) .work-card__media,.work-grid > :nth-child(4n+3) .work-card__media{aspect-ratio:auto;height:100%}.work-grid > :nth-child(4n+2),.work-grid > :nth-child(4n+3){display:grid;grid-template-rows:1fr auto}}
+@media(min-width:900px){.work-grid > :nth-child(4n+1) .work-card__media,.work-grid > :nth-child(4n+4) .work-card__media{aspect-ratio:16/11}}
+</style>
+</head>
+<body>
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="/" class="nav__logo" aria-label="Durga.design home">Durga<i></i>design</a>
+    <ul class="nav__links">
+      <li><a class="nav__link" href="#work">Work</a></li>
+      <li><a class="nav__link" href="#about">About</a></li>
+      <li><a class="nav__link" href="#services">Services</a></li>
+      <li><a class="nav__link" href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm nav__cta" href="https://cal.com/dpdangi/15min" target="_blank" rel="noopener">Book a call <span class="arr">↗</span></a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="container">
+      <div class="hero__frame">
+        <div class="hero__grid" aria-hidden="true"></div>
+        <div class="hero__top">
+          <span class="status fade-in"><span class="status__dot"></span>Open to senior product design roles</span>
+          <span class="hero__time fade-in" data-clock>India · --:--</span>
+        </div>
+        <svg class="spark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg>
+
+        <p class="hero__hello fade-in">Hi, I'm <b>Durga</b> — senior product designer</p>
+        <h1 class="t-hero hero__headline">
+          <span class="rise"><span>Product <a class="face" href="#about" aria-label="About Durga"><img src="/assets/portrait.jpg" alt="" width="800" height="1200"></a> design</span></span>
+          <span class="rise" style="--d:.12s"><span>for <em>fintech</em> &amp; B2B SaaS.</span></span>
+        </h1>
+        <p class="t-lead hero__sub fade-in" style="--d:.4s">8+ years designing fintech and B2B SaaS products people can use without a manual. I’ve shipped work with teams at Vestas, Dhani and EyeOnTask.</p>
+        <div class="hero__actions fade-in" style="--d:.5s">
+          <a class="btn btn-primary btn-lg" data-magnetic href="#work">See my work <span class="arr arr--down">↓</span></a>
+          <a class="btn btn-secondary btn-lg" data-magnetic href="<!--RESUME_URL-->" download>Download resume <span class="arr arr--down">↓</span></a>
+        </div>
+
+        <a class="badge" href="#contact" aria-label="Say hello" data-magnetic>
+          <svg viewBox="0 0 112 112" aria-hidden="true">
+            <defs><path id="circ" d="M56,56 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+            <text><textPath href="#circ">Open to new roles · Say hello · 2026 · </textPath></text>
+          </svg>
+          <span class="badge__core">↗</span>
+        </a>
+      </div>
+
+      <!--LOGO_SLIDER-->
+    </div>
+  </section>
+
+  <section class="band-dark section-md about--dark" id="about">
+    <div class="container about">
+      <div class="portrait rv" data-reveal-img>
+        <img src="/assets/portrait.jpg" alt="Portrait of Durga" loading="lazy" width="800" height="1200">
+        <span class="portrait__tag"><span class="status__dot"></span>Based in Bengaluru, India</span>
+      </div>
+      <div>
+        <p class="t-label eyebrow rv">About me</p>
+        <p class="about__quote rv" style="--i:1">I design the hard parts of software: the screens people use every day, and the ones they have to <em>trust</em>.</p>
+        <p class="t-body about__body rv" style="--i:2">Think of a busy bank counter. If the form is confusing, the queue grows and people get frustrated. Software works the same way, only the queue is invisible. That’s where I spend my time: dense dashboards, multi-step flows, money moving between accounts. I work closely with product managers and engineers, test ideas with real users, and hand off specs developers can build without guessing.</p>
+        <div class="stats">
+          <div class="stat rv" style="--i:3"><span class="stat__num" data-count="8">0<sup>+</sup></span><span class="stat__label">Years designing B2B SaaS &amp; fintech products</span><span class="stat__arr" aria-hidden="true">→</span></div>
+          <div class="stat rv" style="--i:4"><span class="stat__num" data-count="30">0<sup>+</sup></span><span class="stat__label">Products shipped, web and mobile</span><span class="stat__arr" aria-hidden="true">→</span></div>
+        </div>
+        <div class="rv" style="--i:6;margin-top:var(--sp-10)">
+          <div style="display:flex;flex-wrap:wrap;gap:var(--sp-4)"><a class="btn btn-accent" href="https://www.linkedin.com/in/durgaprasad-ux-designer" target="_blank" rel="noopener">Connect on LinkedIn <span class="arr">↗</span></a><a class="btn btn-inv" href="<!--RESUME_URL-->" download>Download resume <span class="arr arr--down">↓</span></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-md work--light" id="work">
+    <div class="container">
+      <div class="shead">
+        <div>
+          <p class="t-label eyebrow rv">Selected work</p>
+          <h2 class="t-h2 rv" style="--i:1">Designs that moved <em>real</em> numbers.</h2>
+        </div>
+        <p class="t-body shead__aside rv" style="--i:2">Four products, four very different users — from families in small towns to 50M fintech customers.</p>
+      </div>
+
+      <div class="work-grid work-grid--light"><!--WORK_CARDS--></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="contact">
+  <div class="container">
+    <p class="footer__kicker rv"><b>✦</b> Free · No commitment · 15 minutes</p>
+    <h2 class="footer__cta rv" style="--i:1">Got a <em>friction</em><br>problem? Let's talk.</h2>
+    <div class="footer__grid">
+      <div class="rv" style="--i:2">
+        <div class="mail">
+          <a href="mailto:contact@hellodurga.com">contact@hellodurga.com</a>
+          <button type="button" data-copy="contact@hellodurga.com" aria-live="polite">Copy</button>
+        </div>
+        <div style="margin-top:var(--sp-6)"><a class="btn btn-accent btn-lg" href="https://cal.com/dpdangi/15min" target="_blank" rel="noopener">Book a 15-min call <span class="arr">↗</span></a></div>
+      </div>
+      <div class="fcol rv" style="--i:3">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/design-system/">Design system</a></li>
+        </ul>
+      </div>
+      <div class="fcol rv" style="--i:4">
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/durgaprasad-ux-designer" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+          <li><a href="https://x.com/my_durgesh" target="_blank" rel="noopener">Twitter / X ↗</a></li>
+          <li><a href="https://www.upwork.com/freelancers/dpdangi" target="_blank" rel="noopener">Upwork ↗</a></li>
+          <li><a href="https://www.fiverr.com/dpdangi11" target="_blank" rel="noopener">Fiverr ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> Durga.design</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

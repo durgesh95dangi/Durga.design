@@ -1,0 +1,556 @@
+[
+  {
+    "slug": "aspect-ratio",
+    "title": "Solve Width, Height, Ratio | Aspect Ratio",
+    "desc": "Solve for width, height, or CSS aspect-ratio from any two values. Simplify 16:9, 4:3, and custom crops. Free calculator that stays in your browser tab.",
+    "name": "Aspect Ratio Calculator",
+    "h1": "Solve for the missing dimension.",
+    "lead": "Work either direction: get the simplified ratio from a width and height, or lock a ratio and solve for the dimension you are missing.",
+    "what": [
+      "An aspect ratio calculator finds the missing width, height, or simplified ratio from the two values you already know, including a CSS aspect-ratio string.",
+      "Thumbnails, video embeds, and og images all need a locked frame. You can start from pixels and get 16:9, or lock a ratio and solve for the side you still need to export."
+    ],
+    "how": [
+      "Enter any two of width, height, or ratio.",
+      "Read the missing dimension and the simplified ratio.",
+      "Copy the CSS aspect-ratio value or the pixel pair into your layout."
+    ],
+    "when": [
+      "Use it when cropping case-study stills, sizing a dashboard preview, or matching a video embed to a card. Recalculate if you change the container, not only the asset."
+    ],
+    "faqs": [
+      {
+        "q": "How do I get a CSS aspect-ratio value?",
+        "a": "Enter width and height (or a known ratio). Copy the simplified pair into aspect-ratio, for example 16 / 9."
+      },
+      {
+        "q": "Can I solve for a missing side?",
+        "a": "Yes. Lock the ratio and one dimension, and the tool computes the other. That is useful when an export target is a fixed width."
+      },
+      {
+        "q": "Does this upload my images?",
+        "a": "No. It is arithmetic in the browser. You never need to upload a file to get the ratio."
+      },
+      {
+        "q": "What are common ratios for product UI?",
+        "a": "16:9 and 4:3 are common for media. 1:1 suits avatars. 3:2 and 2:1 show up in cards and og images. Always confirm against the layout, not only convention."
+      }
+    ],
+    "note": "Ratio math happens in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "border-radius",
+    "title": "Craft Rounded Corners | Border Radius",
+    "desc": "Link or unlock corners, add Figma-style smoothing, and copy border-radius CSS. Free generator that runs in your browser, with nothing uploaded to a server.",
+    "name": "Border Radius Generator",
+    "h1": "Round every corner, on purpose.",
+    "lead": "Link all four corners for a uniform radius, or unlock them to sculpt an asymmetric shape.",
+    "what": [
+      "A border-radius generator lets you set linked or independent corners, optionally with Figma-style smoothing, then copy the CSS for the shape.",
+      "Cards, inputs, and squircle-like icons all need a radius that matches the rest of the system. Unlocking corners is how you get a ticket stub or a chat bubble without drawing a custom path."
+    ],
+    "how": [
+      "Link all four corners for a uniform radius, or unlock them to set each corner.",
+      "Add smoothing if you want a squircle-like curve closer to Figma’s corner smoothing.",
+      "Copy the CSS (and related path tricks when smoothing is on) into your project."
+    ],
+    "when": [
+      "Use it when a design file shows mixed radii, or when engineering asks for the exact four-value border-radius shorthand. Check the radius at the real component size, because a 24px round on a 32px chip looks like a pill."
+    ],
+    "faqs": [
+      {
+        "q": "Can I set each corner separately?",
+        "a": "Yes. Unlock the corners and set top-left, top-right, bottom-right, and bottom-left independently. The CSS shorthand follows that order."
+      },
+      {
+        "q": "What is corner smoothing?",
+        "a": "Figma’s corner smoothing eases the curve toward a squircle instead of a simple circular arc. This tool approximates that look so CSS can get closer to the mockup."
+      },
+      {
+        "q": "How do I copy the CSS?",
+        "a": "Copy the border-radius declaration (and any extra output the tool shows for smoothing) and paste it onto the element or token."
+      },
+      {
+        "q": "Is anything uploaded?",
+        "a": "No. The shape is computed locally in your browser."
+      }
+    ],
+    "note": "Radius CSS is generated in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "color-blindness",
+    "title": "Simulate Color Blindness | CVD Preview",
+    "desc": "Preview a color or UI screenshot under protanopia, deuteranopia, and tritanopia. Free CVD simulator that runs locally. Your image is never uploaded anywhere.",
+    "name": "Color Blindness Simulator",
+    "h1": "See it the way about 8% of men do.",
+    "lead": "Upload a UI screenshot or mockup and preview it through standard color-vision-deficiency transforms. It runs in your browser. Nothing is sent anywhere.",
+    "what": [
+      "A color blindness simulator approximates how a color or interface looks under common color vision deficiencies such as protanopia, deuteranopia, and tritanopia.",
+      "About 8% of men have some form of red-green deficiency. Charts, status dots, and error states that rely on hue alone fail that group. This preview uses standard CVD transforms in the browser so you can catch those failures in a mockup."
+    ],
+    "how": [
+      "Pick a color, or upload a screenshot or mockup from your machine.",
+      "Switch between common CVD types and compare against the original.",
+      "Adjust the design until meaning still holds without relying on hue alone."
+    ],
+    "when": [
+      "Use it on dashboards, maps, form validation, and any Fintech state that is only red versus green. Pair it with the contrast checker so type still reads after the hue shift."
+    ],
+    "faqs": [
+      {
+        "q": "Which types of color vision deficiency can I preview?",
+        "a": "The simulator covers common types including protanopia, deuteranopia, and tritanopia, so you can spot palettes that collapse for red-green or blue-yellow deficiencies."
+      },
+      {
+        "q": "Is my screenshot uploaded?",
+        "a": "No. The image is read locally in your browser and the CVD transform is applied on the device. Nothing is sent to a server."
+      },
+      {
+        "q": "Is a simulator the same as talking to people with CVD?",
+        "a": "No. It is a fast check, not a substitute for research. Use it to catch obvious hue-only encodings before usability testing."
+      },
+      {
+        "q": "How should I fix a palette that fails the preview?",
+        "a": "Add a second cue: icon, pattern, position, or label. Do not rely on color alone for success, error, or warning."
+      }
+    ],
+    "note": "Simulation runs in the browser. Your image is not uploaded."
+  },
+  {
+    "slug": "contrast-checker",
+    "title": "Check WCAG Contrast | Contrast Checker",
+    "desc": "Check WCAG 2 contrast between text and background. Get AA and AAA results for normal and large type, free in your browser. Copy the ratio, then ship the pair.",
+    "name": "Contrast Checker",
+    "h1": "Does this pair actually read?",
+    "lead": "Two colors, one ratio. This runs the WCAG relative-luminance formula in your browser and tells you whether text on this background will hold up.",
+    "what": [
+      "A contrast checker compares the relative luminance of a foreground color and a background color, then reports the ratio against WCAG AA and AAA thresholds.",
+      "Designers use it before locking a palette so body copy, labels, and UI chrome stay readable. This version runs the WCAG relative-luminance formula locally, so you can try pairs without sending colors to a server."
+    ],
+    "how": [
+      "Set the foreground (text) color and the background color with the pickers or by typing hex.",
+      "Read the contrast ratio and the pass or fail state for normal text and large text.",
+      "Swap colors if you need the inverse pair, then copy the ratio or CSS color values."
+    ],
+    "when": [
+      "Use it when choosing type on cards, buttons, charts, and dense B2B dashboards. Check hover and disabled states too, not only the default fill. Large text (18px regular or 14px bold, in WCAG terms) has a lower bar than body copy."
+    ],
+    "faqs": [
+      {
+        "q": "How does this contrast checker work?",
+        "a": "It converts each hex color to sRGB, computes relative luminance with the WCAG 2 formula, then divides the lighter luminance by the darker one (plus 0.05). The result is the contrast ratio shown on the page."
+      },
+      {
+        "q": "What contrast ratio is WCAG AA and AAA?",
+        "a": "For normal text, AA is 4.5:1 and AAA is 7:1. For large text, AA is 3:1 and AAA is 4.5:1. UI graphics and focus indicators often target at least 3:1 against adjacent colors."
+      },
+      {
+        "q": "Does the tool upload my colors?",
+        "a": "No. Color values stay in your browser. There is no account and no backend processing."
+      },
+      {
+        "q": "How do I copy the result into CSS?",
+        "a": "Copy the hex (or other CSS color) from the tool, then paste it into your stylesheet or design tokens. Keep the ratio next to the pair in a spec so engineering does not drift."
+      },
+      {
+        "q": "Is this a substitute for a full accessibility audit?",
+        "a": "No. Contrast is one WCAG requirement. You still need to check focus order, names, states, motion, and real assistive-tech testing on the product."
+      }
+    ],
+    "note": "Contrast is calculated in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "css-grid",
+    "title": "Build CSS Grid Layouts | Grid Generator",
+    "desc": "Set columns, rows, and gap, then copy production CSS Grid. Preview the template live. Free generator, no account, no backend, and nothing is uploaded.",
+    "name": "CSS Grid Generator",
+    "h1": "Build the grid, then take the code.",
+    "lead": "Set columns, rows, and gap. See the layout live, then copy the exact CSS.",
+    "what": [
+      "A CSS Grid generator lets you set columns, rows, and gap on a live template, then copy the grid rules into a stylesheet.",
+      "It is a playground for grid-template-columns, grid-template-rows, and gap so you can see tracks before you commit them to a dashboard or marketing layout."
+    ],
+    "how": [
+      "Choose how many columns and rows you need, plus the gap.",
+      "Watch the live template update as you change tracks.",
+      "Copy the CSS Grid declarations into your project."
+    ],
+    "when": [
+      "Use it for card galleries, form layouts, and app shells where Flexbox would fight you on two axes. Keep the generated CSS as a starting point, then name grid areas if the layout is complex."
+    ],
+    "faqs": [
+      {
+        "q": "What CSS does this generator output?",
+        "a": "It outputs Grid properties such as display: grid, grid-template-columns, grid-template-rows, and gap, based on the controls you set."
+      },
+      {
+        "q": "How do I copy the CSS?",
+        "a": "Use the copy control on the generated rules, then paste them onto the container selector. Add child placement (grid-column, grid-row) in your own CSS as needed."
+      },
+      {
+        "q": "Does the playground send my layout to a server?",
+        "a": "No. The preview and the CSS string are built in your browser."
+      },
+      {
+        "q": "When should I use Grid instead of Flexbox?",
+        "a": "Use Grid when you need rows and columns together. Use Flexbox when you are lining up a single row or column of items. This site has a Flexbox playground for that case."
+      }
+    ],
+    "note": "Grid CSS is generated in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "flexbox",
+    "title": "Tune Flexbox Live | Flexbox Playground",
+    "desc": "Tune flex-direction, wrap, justify-content, align-items, and gap on a live playground. Copy the CSS when it looks right. Free, local, and no account needed.",
+    "name": "Flexbox Playground",
+    "h1": "Every flex property, one preview.",
+    "lead": "Toggle the container properties and watch three items react in real time, then copy the CSS.",
+    "what": [
+      "A Flexbox playground applies container properties such as direction, wrap, alignment, and gap to live items so you can copy working CSS.",
+      "Flexbox is still the fastest way to align toolbars, button groups, and stacked mobile sections. Seeing three items react as you toggle justify and align beats memorizing the chart."
+    ],
+    "how": [
+      "Toggle direction, wrap, justify-content, align-items, and gap.",
+      "Watch the sample items reflow in the preview.",
+      "Copy the CSS for the container when the alignment matches the spec."
+    ],
+    "when": [
+      "Use it for nav rows, card footers, and form actions. If you need a full page of rows and columns, switch to the CSS Grid generator instead."
+    ],
+    "faqs": [
+      {
+        "q": "Which Flexbox properties can I control?",
+        "a": "You can tune container properties including flex-direction, flex-wrap, justify-content, align-items, and gap, then copy those declarations."
+      },
+      {
+        "q": "How do I copy the CSS?",
+        "a": "Copy the generated rule set and paste it on the flex container. Item-level properties such as flex-grow still belong on the children."
+      },
+      {
+        "q": "Does this require a backend?",
+        "a": "No. The playground is client-side. Nothing is uploaded."
+      },
+      {
+        "q": "Why do my items not stretch the way I expect?",
+        "a": "Align-items and the item’s own height or width interact. Stretch only works if the item does not have a fixed size on that axis. Use the preview to confirm before you ship."
+      }
+    ],
+    "note": "Flexbox CSS is generated in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "gradient",
+    "title": "Compose CSS Gradients | Gradient Generator",
+    "desc": "Compose linear or radial CSS gradients with color stops and angle. Copy the background rule in one click. Free generator that stays in your browser tab.",
+    "name": "Gradient Generator",
+    "h1": "Blend colors, keep the code.",
+    "lead": "Add stops, set the angle, switch between linear and radial, then copy the CSS straight into your project.",
+    "what": [
+      "A CSS gradient generator builds linear or radial gradients from color stops and direction, then copies a background value you can paste into CSS.",
+      "Hero washes, chart fills, and subtle surface sheens all start as a few stops. Keep contrast in mind: text on a gradient still has to pass WCAG against the lightest and darkest regions it sits on."
+    ],
+    "how": [
+      "Choose linear or radial, then set the angle or position.",
+      "Add or move color stops until the blend matches the mockup.",
+      "Copy the CSS background (or background-image) rule into your project."
+    ],
+    "when": [
+      "Use it for marketing heroes, empty states, and brand moments. Prefer tokens for product chrome so every screen does not invent a new wash."
+    ],
+    "faqs": [
+      {
+        "q": "What kinds of gradients can I make?",
+        "a": "You can build linear and radial gradients with multiple stops, then copy the CSS function into a background property."
+      },
+      {
+        "q": "How do I copy the CSS?",
+        "a": "Copy the generated linear-gradient or radial-gradient string and paste it as background or background-image."
+      },
+      {
+        "q": "Will text still pass contrast on a gradient?",
+        "a": "Not automatically. Check the text color against the lightest and darkest parts of the wash with the Contrast Checker on this site."
+      },
+      {
+        "q": "Is the gradient uploaded?",
+        "a": "No. Stops and the CSS string are handled in your browser."
+      }
+    ],
+    "note": "Gradient CSS is generated in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "hex-to-rgb",
+    "title": "Convert Hex to RGB and HSL | Converter",
+    "desc": "Convert hex colors to RGB and HSL, or reverse them. Copy CSS-ready values in one click. Free, local, no account, and nothing leaves your browser window.",
+    "name": "Hex to RGB/HSL Converter",
+    "h1": "Hex to RGB and HSL",
+    "lead": "Convert hex to RGB and HSL, or reverse it. Copy any format with the icon.",
+    "what": [
+      "A hex to RGB converter translates CSS hex colors into RGB and HSL, and can convert those channels back into hex for tokens, code, and design files.",
+      "Product teams bounce between Figma hex, CSS rgb(), and HSL for theming. This tool keeps every format in sync so you can paste the one your codebase already uses."
+    ],
+    "how": [
+      "Paste or type a hex color, or enter RGB or HSL channels.",
+      "Watch the other formats update, including CSS function strings.",
+      "Copy the format you need with the copy control next to the value."
+    ],
+    "when": [
+      "Use it when a spec is in hex but the codebase wants rgb() or hsl(), when you are documenting a palette, or when you need to nudge lightness in HSL without losing the hue."
+    ],
+    "faqs": [
+      {
+        "q": "Which color formats does this converter support?",
+        "a": "It converts between hex, RGB, and HSL and shows CSS-ready strings you can paste into a stylesheet or token file."
+      },
+      {
+        "q": "Does conversion happen on a server?",
+        "a": "No. Channel math runs in your browser. Colors are not uploaded."
+      },
+      {
+        "q": "How do I copy a value into CSS?",
+        "a": "Use the copy icon beside RGB, HSL, or hex. Paste the string into a custom property, a utility class, or a Figma color style note."
+      },
+      {
+        "q": "Why convert hex to HSL?",
+        "a": "HSL makes it easier to keep hue and saturation while changing lightness for hover, pressed, and muted variants of the same brand color."
+      }
+    ],
+    "note": "Color conversion happens in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "line-height",
+    "title": "Tune Line Height and Tracking | Calculator",
+    "desc": "Turn a font size into line-height and letter-spacing you can paste. Preview body and display settings, then copy CSS. Free calculator that runs locally.",
+    "name": "Line Height / Letter Spacing Calculator",
+    "h1": "Set the rhythm of a paragraph.",
+    "lead": "Pick a font size and a reading context, then tune line height and letter spacing with a live preview.",
+    "what": [
+      "A line-height and letter-spacing calculator maps a font size to leading and tracking values you can preview and copy into CSS.",
+      "Body copy usually wants more line-height than a hero headline. Display type often wants tighter tracking. This tool gives you both numbers with a live paragraph so you are not guessing in Figma and again in code."
+    ],
+    "how": [
+      "Enter the font size and pick a reading context (body, UI, display).",
+      "Adjust line-height and letter-spacing while watching the preview.",
+      "Copy the CSS properties when the rhythm feels right."
+    ],
+    "when": [
+      "Use it for long-form help docs, settings pages, and marketing blocks where a 1.2 line-height will crush paragraphs or a 1.8 will look loose. Recheck after you change the typeface, not only the size."
+    ],
+    "faqs": [
+      {
+        "q": "What line-height should body text use?",
+        "a": "Many product UIs land between 1.4 and 1.6 for body sizes around 16px. Headlines often sit closer to 1.1 to 1.25. Measure with your actual font, because x-height changes the feel."
+      },
+      {
+        "q": "Is letter-spacing the same as kerning?",
+        "a": "No. Kerning is pair-specific spacing inside the font. Letter-spacing (tracking) adds or removes space across a whole string. This calculator outputs tracking, not kerning tables."
+      },
+      {
+        "q": "How do I copy the CSS?",
+        "a": "Copy the line-height and letter-spacing declarations from the tool and paste them onto the selector or token that owns that text style."
+      },
+      {
+        "q": "Does anything leave my browser?",
+        "a": "No. The preview and the math run locally."
+      }
+    ],
+    "note": "Line-height and tracking are calculated in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "px-to-rem",
+    "title": "Convert px to rem and em | Unit Converter",
+    "desc": "Convert pixels to rem and em against a root or parent size. Paste a list and copy a table of units. Free converter that runs locally in your browser tab.",
+    "name": "Px to Rem/Em Converter",
+    "h1": "Pixels to rem and em.",
+    "lead": "Set a root size, paste a list of pixel values, and get rem and em in one table.",
+    "what": [
+      "A px to rem converter divides pixel values by a root (or parent) font size so you can paste rem and em units that scale with the user’s settings.",
+      "Most browsers default to 16px root, but design systems often set 10px or 62.5% tricks. This tool lets you set that root, paste several pixel values, and read rem and em in one table."
+    ],
+    "how": [
+      "Set the root font size (and parent size if you need em).",
+      "Paste one pixel value or a list of values.",
+      "Copy rem, em, or the whole table into your CSS or tokens."
+    ],
+    "when": [
+      "Use it when a mock is in pixels but the codebase is rem-based, or when you are migrating a legacy stylesheet. Confirm the live html font-size before you trust the default 16."
+    ],
+    "faqs": [
+      {
+        "q": "What is the difference between rem and em?",
+        "a": "rem is relative to the root element (usually html). em is relative to the parent’s font-size. Nested em values compound; rem does not."
+      },
+      {
+        "q": "Why is 16px the default root?",
+        "a": "User agents typically start at 16px. If your CSS sets html { font-size: 62.5% } or a pixel root, change the root field in this tool to match production."
+      },
+      {
+        "q": "How do I copy the converted units?",
+        "a": "Copy an individual rem or em value, or copy from the table if you pasted a list. Paste into custom properties or utility maps."
+      },
+      {
+        "q": "Does this send my values anywhere?",
+        "a": "No. Unit conversion is local arithmetic in the browser."
+      }
+    ],
+    "note": "Unit conversion happens in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "shadow",
+    "title": "Design CSS Box Shadows | Shadow Generator",
+    "desc": "Build a CSS box-shadow with offset, blur, spread, and color. Preview elevation live, then copy the CSS rule. Free generator that runs locally, no signup.",
+    "name": "Shadow Generator",
+    "h1": "Give it some lift.",
+    "lead": "Dial in offset, blur, spread, and color. The card previews it live, and you take the box-shadow.",
+    "what": [
+      "A box-shadow generator lets you set offset, blur, spread, and color on a live preview, then copy a CSS box-shadow value.",
+      "Elevation should be a system, not a one-off. Soft, slightly downward shadows read as cards on light UI. Keep opacity low on dense Fintech screens so charts stay the focus."
+    ],
+    "how": [
+      "Adjust x and y offset, blur, spread, and shadow color.",
+      "Watch the preview card so the elevation matches the mockup.",
+      "Copy the box-shadow declaration into CSS or a token."
+    ],
+    "when": [
+      "Use it for cards, popovers, and sticky bars. Prefer a small set of elevation steps (for example rest, hover, modal) instead of a unique shadow per component."
+    ],
+    "faqs": [
+      {
+        "q": "What does blur versus spread do?",
+        "a": "Blur softens the edge. Spread grows or shrinks the shadow before blur is applied. Positive spread makes a larger silhouette; negative spread tightens it."
+      },
+      {
+        "q": "How do I copy the CSS?",
+        "a": "Copy the box-shadow value and paste it onto the selector or into a token such as --shadow-md."
+      },
+      {
+        "q": "Can I use this for drop shadows on text?",
+        "a": "This tool targets box-shadow on elements. Text usually uses text-shadow, which is a related but separate property."
+      },
+      {
+        "q": "Does generation happen locally?",
+        "a": "Yes. The preview and the CSS string stay in your browser. Nothing is uploaded."
+      }
+    ],
+    "note": "Shadow CSS is generated in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "spacing-scale",
+    "title": "Generate a Spacing Scale | Spacing Tool",
+    "desc": "Build a spacing scale from a base unit, linear or geometric. Copy padding, margin, and gap tokens for CSS or a design system. Free to use, and fully local.",
+    "name": "Spacing/Sizing Scale Calculator",
+    "h1": "Stop guessing padding values.",
+    "lead": "Generate a consistent spacing scale, linear or geometric, so every margin and gap comes from the same system.",
+    "what": [
+      "A spacing scale calculator generates a ladder of spacing values from a base unit so padding, margin, and gap come from one system instead of one-off pixels.",
+      "Teams often standardize on 4px or 8px. Linear scales add the base each step. Geometric scales multiply. Either way, you get named steps you can drop into tokens or Tailwind-style spacing maps."
+    ],
+    "how": [
+      "Set a base unit (for example 4 or 8) and choose linear or geometric growth.",
+      "Review the generated steps and how they would feel as padding or gap.",
+      "Copy the values into design tokens or CSS custom properties."
+    ],
+    "when": [
+      "Use it when a SaaS UI has 7px here and 11px there. A shared scale speeds reviews and keeps denser Fintech layouts from drifting. Keep a couple of exception values if you must, and document them."
+    ],
+    "faqs": [
+      {
+        "q": "What is an 8-point spacing grid?",
+        "a": "It is a convention where most spacing is a multiple of 8 (or 4 on compact screens). It is a starting system, not a law. This tool can generate that ladder from your base unit."
+      },
+      {
+        "q": "Should I use a linear or geometric scale?",
+        "a": "Linear is predictable for UI padding. Geometric jumps faster and can suit large marketing sections. Pick the one that matches how many distinct steps you actually use."
+      },
+      {
+        "q": "How do I copy the scale into CSS?",
+        "a": "Copy the pixel or rem steps and map them to tokens such as --space-1 through --space-8, or to your theme.spacing object."
+      },
+      {
+        "q": "Is the scale computed on a server?",
+        "a": "No. It is generated in your browser. Nothing is uploaded."
+      }
+    ],
+    "note": "The spacing scale is calculated in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "svg-to-base64",
+    "title": "Encode SVG as a Data URI | SVG to Base64",
+    "desc": "Paste or drop an SVG and get a base64 data URI for CSS, HTML, or JSX. Encoding stays in your browser. Free converter; nothing is uploaded to a server.",
+    "name": "SVG to Base64 Converter",
+    "h1": "Paste it, ship it inline.",
+    "lead": "Drop an SVG file or paste raw markup. Get a base64 data URI ready for CSS, HTML, or JSX.",
+    "what": [
+      "An SVG to Base64 converter encodes SVG markup into a data URI you can use as a CSS background, an img src, or an inline asset in HTML or JSX.",
+      "Small icons and simple illustrations ship faster as data URIs when you want zero extra network request. Keep an eye on size: large illustrations belong in files, not in CSS."
+    ],
+    "how": [
+      "Paste raw SVG markup or drop an .svg file from your machine.",
+      "Review the encoded data URI output.",
+      "Copy the URI into CSS url(), an img src, or a JSX attribute."
+    ],
+    "when": [
+      "Use it for tiny UI icons, empty-state marks, and background flourishes. Prefer files or an SVG sprite when the same asset is reused many times or is heavy."
+    ],
+    "faqs": [
+      {
+        "q": "What is an SVG data URI?",
+        "a": "It is the SVG file encoded (often as base64) into a string that starts with data:image/svg+xml. Browsers can paint it without a separate image request."
+      },
+      {
+        "q": "Is my SVG uploaded to a server?",
+        "a": "No. Encoding runs in your browser with the File API or the pasted markup. Nothing is sent anywhere."
+      },
+      {
+        "q": "How do I use the output in CSS?",
+        "a": "Paste the data URI inside url(\"...\") on background-image, or use it as the src of an img. In JSX, the same string works as a src or CSS variable."
+      },
+      {
+        "q": "Should I minify the SVG first?",
+        "a": "Yes when you can. Fewer path points and no editor metadata means a shorter URI and less CSS weight."
+      },
+      {
+        "q": "Can I reverse base64 back to SVG?",
+        "a": "This page is built for SVG to data URI. To reverse, decode the base64 payload after the comma in the data URI with any local decoder."
+      }
+    ],
+    "note": "SVG encoding happens in the browser. Nothing is uploaded."
+  },
+  {
+    "slug": "type-scale",
+    "title": "Build a Modular Type Scale | Type Scale",
+    "desc": "Generate a modular type scale from a base size and ratio. Preview heading steps and copy rem values. Free, local, and ready for design tokens or CSS files.",
+    "name": "Type Scale Generator",
+    "h1": "A scale, not a guess.",
+    "lead": "Pick a base size and a ratio. Every step multiplies the last by that ratio, so your type never feels arbitrary.",
+    "what": [
+      "A type scale generator builds a modular set of font sizes by multiplying a base size by a chosen ratio so headings and body type stay related.",
+      "Instead of picking 13, 15, 18, and 22 by eye, each step is the previous size times the ratio (for example a major third or perfect fourth). You get a ladder you can drop into tokens or a stylesheet."
+    ],
+    "how": [
+      "Choose a base size and a modular ratio.",
+      "Review the generated steps in the preview.",
+      "Copy the sizes (often in rem) into tokens, CSS, or a type spec."
+    ],
+    "when": [
+      "Use it at the start of a design system, a marketing site, or a SaaS app shell when you need heading levels that feel intentional rather than arbitrary."
+    ],
+    "faqs": [
+      {
+        "q": "What is a modular type scale?",
+        "a": "It is a sequence of font sizes where each step equals the last step multiplied by a constant ratio. The ratio is what keeps the scale musical instead of random."
+      },
+      {
+        "q": "Which ratio should I pick?",
+        "a": "Minor second and major second stay tight for dense product UI. Perfect fourth and golden ratio jump faster, which suits editorial or marketing heroes. Match the ratio to how many heading levels you actually ship."
+      },
+      {
+        "q": "Does this tool send my sizes to a server?",
+        "a": "No. The scale is calculated in your browser."
+      },
+      {
+        "q": "How do I copy the scale into CSS?",
+        "a": "Copy the rem (or px) values and map them to custom properties such as --fs-h1 through --fs-body, or to your token JSON."
+      }
+    ],
+    "note": "The scale is calculated in the browser. Nothing is uploaded."
+  }
+]

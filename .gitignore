@@ -1,0 +1,7 @@
+# Local tooling / caches
+node_modules/
+.wrangler/
+.claude/
+*.log
+.DS_Store
+Thumbs.db

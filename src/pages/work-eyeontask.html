@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EyeOnTask Field Service SaaS — Case Study | Durga.design</title>
+<meta name="description" content="How I redesigned EyeOnTask's web and mobile field service platform so admins, team leaders and fieldworkers share one real-time job pipeline.">
+<meta property="og:title" content="EyeOnTask — Field Service SaaS case study">
+<meta property="og:image" content="/assets/eyeontask.png">
+<meta name="theme-color" content="#F5F2EE">
+<link rel="icon" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/ds.css">
+</head>
+<body>
+<!--
+  CASE STUDY TEMPLATE — copy this file to /work/<slug>/index.html and replace content.
+  Section order (keep it): Header → Cover → Impact stats → Overview → Problem → Solution → Outcomes → Next case → Footer.
+  Only use components from /assets/css/ds.css. No page-level <style> block.
+-->
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="/" class="nav__logo" aria-label="Durga.design home">Durga<i></i>design</a>
+    <ul class="nav__links">
+      <li><a class="nav__link is-active" href="/#work">Work</a></li>
+      <li><a class="nav__link" href="/#about">About</a></li>
+      <li><a class="nav__link" href="/#services">Services</a></li>
+      <li><a class="nav__link" href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm nav__cta" href="https://cal.com/dpdangi/15min" target="_blank" rel="noopener">Book a call <span class="arr">↗</span></a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- 1. HEADER -->
+  <section class="cs-hero">
+    <div class="container">
+      <nav class="crumbs fade-in" aria-label="Breadcrumb"><a href="/#work">Work</a><span aria-hidden="true">/</span><span>EyeOnTask</span></nav>
+      <div class="tags fade-in" style="--d:.05s"><span class="tag">SaaS · B2B</span><span class="tag tag-neutral">Web &amp; Mobile</span><span class="tag tag-neutral">Field service</span></div>
+      <h1 class="t-h1 cs-hero__title fade-in" style="--d:.1s">Putting the office and the field on the <em>same page</em>.
+      </h1>
+      <div class="cs-hero__grid">
+        <p class="t-lead cs-hero__summary fade-in" style="--d:.45s">EyeOnTask helps businesses that run plumbers, electricians and technicians handle service requests, dispatching and invoicing in one platform. I led the redesign of the web and mobile apps so everyone, from the Super Admin to the fieldworker, works from one live job pipeline.</p>
+        <dl class="cs-meta fade-in" style="--d:.55s">
+          <div><dt>My role</dt><dd>Lead UI/UX Designer</dd></div>
+          <div><dt>Duration</dt><dd>18 months</dd></div>
+          <div><dt>Platform</dt><dd>Web &amp; Mobile</dd></div>
+          <div><dt>Tools</dt><dd>Figma, Maze, Hotjar</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. COVER -->
+  <div class="container">
+    <figure class="cs-cover rv" data-reveal-img>
+      <img src="/assets/eyeontask.png" alt="EyeOnTask dashboard showing jobs, revenue and team status" width="1024" height="679">
+    </figure>
+  </div>
+
+  <!-- 3. IMPACT STATS -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="stat-grid rv">
+        <div class="stat-cell"><div class="stat-cell__value"><span class="from">28%</span> → <span class="to">13%</span></div><div class="t-caption">Customer churn</div></div>
+        <div class="stat-cell"><div class="stat-cell__value"><span class="from">2.8</span> → <span class="to">4.4</span></div><div class="t-caption">Play Store rating</div></div>
+        <div class="stat-cell"><div class="stat-cell__value" data-count="26">0</div><div class="t-caption">Countries served</div></div>
+        <div class="stat-cell"><div class="stat-cell__value"><span data-count="1">0</span>K<sup style="color:var(--clr-accent);font-size:.5em;vertical-align:top">+</sup></div><div class="t-caption">Client businesses</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4–7. BODY -->
+  <section class="section-md" style="padding-top:var(--sp-12)">
+    <div class="container cs-layout">
+      <aside class="cs-toc" aria-label="On this page">
+        <p class="t-label">On this page</p>
+        <ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#solution">The job module</a></li>
+          <li><a href="#outcomes">Outcomes</a></li>
+        </ol>
+      </aside>
+
+      <div>
+        <section class="cs-section" id="overview">
+          <p class="cs-section__k rv">Overview</p>
+          <div class="prose">
+            <h2 class="rv">More field teams are going digital. Most of them inherit the chaos.</h2>
+            <p class="rv">Field service businesses are digitising faster than ever. For a company managing plumbers, electricians and technicians, that means more revenue, but also more operational mess spread across disconnected tools, chat apps and spreadsheets.</p>
+            <p class="rv">EyeOnTask replaces that mess with one platform for service requests, dispatching and invoicing. My job was to make that platform feel like one product to every person who touches a job.</p>
+          </div>
+        </section>
+
+        <section class="cs-section" id="problem">
+          <p class="cs-section__k rv">The problem</p>
+          <div class="figure--split">
+            <div class="prose">
+              <h2 class="rv">A disconnected pipeline.</h2>
+              <p class="rv">When a job was dispatched, the Team Leader had no idea if the fieldworker had started it. Fieldworkers got job details scattered across WhatsApp messages and paper slips.</p>
+              <p class="rv">Invoicing was always late, because the back office only learned a job was done when end-of-day reports came in. There was no single source of truth, so everyone worked in silos.</p>
+            </div>
+            <figure class="figure rv" style="--i:1;margin:0">
+              <div class="figure__frame"><img src="/assets/work/eyeontask/fragmented-tools.png" alt="Illustration of a business juggling many disconnected tools" loading="lazy" width="1024" height="1024"></div>
+              <figcaption><b>Before</b> Jobs lived across chat apps, paper and spreadsheets.</figcaption>
+            </figure>
+          </div>
+          <blockquote class="pull rv" style="margin-top:var(--sp-12)">The biggest bottleneck wasn't the work. It was the gap between the office and the field.</blockquote>
+        </section>
+
+        <section class="cs-section" id="solution">
+          <p class="cs-section__k rv">The solution</p>
+          <div class="prose">
+            <h2 class="rv">One job module, synced for every role.</h2>
+            <p class="rv">I designed a single Job Module that keeps Super Admins, Team Leaders and Fieldworkers on the same record in real time. Each step of a job's life fixes one specific breakdown.</p>
+          </div>
+
+          <figure class="figure rv">
+            <div class="figure__frame"><img src="/assets/work/eyeontask/eyeontask-job-module.png" alt="EyeOnTask job creation and assignment screens" loading="lazy" width="1024" height="510"></div>
+            <figcaption><b>Job module</b> Create, assign and track a job from one screen.</figcaption>
+          </figure>
+
+          <article class="ps rv">
+            <header class="ps__head"><span>01</span><h3>Creation &amp; assignment</h3></header>
+            <div class="ps__col"><p class="ps__label ps__label--problem">Problem</p><p>Fieldworkers got vague job details by text message, which led to miscommunication and late arrivals.</p></div>
+            <div class="ps__col"><p class="ps__label ps__label--solution">Solution</p><p>Admins and Team Leaders create a job and assign it to an available fieldworker in one step. Location, task details and client history travel with the job card.</p></div>
+          </article>
+          <article class="ps rv">
+            <header class="ps__head"><span>02</span><h3>Real-time status sync</h3></header>
+            <div class="ps__col"><p class="ps__label ps__label--problem">Problem</p><p>The back office kept calling technicians to ask whether a job had started or finished.</p></div>
+            <div class="ps__col"><p class="ps__label ps__label--solution">Solution</p><p>Fieldworkers update status (In Progress, On Hold, Completed) on the job itself. The manager and the owner see the change instantly because everyone shares the same pipeline.</p></div>
+          </article>
+          <article class="ps rv">
+            <header class="ps__head"><span>03</span><h3>Job details &amp; time tracking</h3></header>
+            <div class="ps__col"><p class="ps__label ps__label--problem">Problem</p><p>Hours were logged on manual timesheets, which were easy to get wrong.</p></div>
+            <div class="ps__col"><p class="ps__label ps__label--solution">Solution</p><p>A timer on the job details screen tracks hours as the work happens, and feeds straight into billing so invoices can be generated automatically.</p></div>
+          </article>
+          <article class="ps rv">
+            <header class="ps__head"><span>04</span><h3>Instant invoicing</h3></header>
+            <div class="ps__col"><p class="ps__label ps__label--problem">Problem</p><p>Invoices sat for days while managers waited for paper reports to reach the office.</p></div>
+            <div class="ps__col"><p class="ps__label ps__label--solution">Solution</p><p>When a job is marked Completed, the Team Leader is notified and can send the invoice right away, closing the gap between finishing the work and getting paid.</p></div>
+          </article>
+
+          <figure class="figure rv">
+            <div class="figure__frame"><img src="/assets/eyeontask.png" alt="EyeOnTask live status dashboard" loading="lazy" width="1024" height="679"></div>
+            <figcaption><b>Dashboard</b> Live job status, revenue and team activity in one view.</figcaption>
+          </figure>
+        </section>
+
+        <section class="cs-section" id="outcomes">
+          <p class="cs-section__k rv">Outcomes</p>
+          <div class="prose">
+            <h2 class="rv">What we shipped.</h2>
+            <p class="rv">Over 18 months the redesign became the foundation for both platforms. Churn dropped from 28% to 13%, and the Play Store rating climbed from 2.8 to 4.4.</p>
+          </div>
+          <ol class="outcomes rv" style="margin-top:var(--sp-8)">
+            <li>A design system built from scratch</li>
+            <li>One scalable architecture for web and mobile</li>
+            <li>Core field service features designed and tested</li>
+            <li>Faster flows for scheduling and invoicing</li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. NEXT CASE -->
+  <section class="section-md band-alt">
+    <div class="container">
+      <p class="t-label eyebrow rv">Next case study</p>
+      <a class="next-case rv" href="https://durgadesign-staging.up.railway.app/case-study-vilcart">
+        <div>
+          <div class="tags" style="margin-bottom:var(--sp-4)"><span class="tag">B2B E-commerce</span><span class="tag tag-neutral">Mobile</span></div>
+          <h2 class="t-h2" style="margin-bottom:var(--sp-4)">Vilcart — shopping built for <em>village</em> retailers.</h2>
+          <p class="t-body" style="margin-bottom:var(--sp-6)">Regional languages, COD-first checkout and low-bandwidth screens for South Indian rural stores.</p>
+          <span class="btn btn-primary">Read case study <span class="arr">↗</span></span>
+        </div>
+        <div class="next-case__media"><img src="/assets/vilcart.jpg" alt="Vilcart app screens" loading="lazy"></div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" id="contact">
+  <div class="container">
+    <p class="footer__kicker rv"><b>✦</b> Free · No commitment · 15 minutes</p>
+    <h2 class="footer__cta rv" style="--i:1">Need this kind of<br><em>thinking</em>? Let's talk.</h2>
+    <div class="footer__grid">
+      <div class="rv" style="--i:2">
+        <div class="mail">
+          <a href="mailto:contact@hellodurga.com">contact@hellodurga.com</a>
+          <button type="button" data-copy="contact@hellodurga.com" aria-live="polite">Copy</button>
+        </div>
+        <div style="margin-top:var(--sp-6)"><a class="btn btn-accent btn-lg" href="https://cal.com/dpdangi/15min" target="_blank" rel="noopener">Book a 15-min call <span class="arr">↗</span></a></div>
+      </div>
+      <div class="fcol rv" style="--i:3">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/design-system/">Design system</a></li>
+        </ul>
+      </div>
+      <div class="fcol rv" style="--i:4">
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/durgaprasad-ux-designer" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+          <li><a href="https://x.com/my_durgesh" target="_blank" rel="noopener">Twitter / X ↗</a></li>
+          <li><a href="https://www.upwork.com/freelancers/dpdangi" target="_blank" rel="noopener">Upwork ↗</a></li>
+          <li><a href="https://www.fiverr.com/dpdangi11" target="_blank" rel="noopener">Fiverr ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> Durga.design</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

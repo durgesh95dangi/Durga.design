@@ -1,0 +1,11 @@
+{
+  "name": "durga-design",
+  "private": true,
+  "type": "module",
+  "description": "durga.design — static site built from src/ with the design system in site/assets/css/ds.css",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "check": "node build/check.mjs",
+    "deploy": "node build/build.mjs && node build/check.mjs && npx --yes wrangler@4 pages deploy site --project-name durga-design --branch main --commit-dirty=true"
+  }
+}
