@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node build/build.mjs",
     "check": "node build/check.mjs",
-    "deploy": "node build/build.mjs && node build/check.mjs && npx --yes wrangler@4 pages deploy site --project-name durga-design --branch main --commit-dirty=true"
+    "deploy": "node build/build.mjs && node build/check.mjs && npx --yes wrangler@4 pages deploy site --project-name durga-design --branch main --commit-dirty=true",
+    "promote": "node build/promote.mjs"
   }
 }

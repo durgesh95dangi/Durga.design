@@ -6,4 +6,10 @@
 /work/pureblue/ /work/ 301
 /book-a-call https://cal.com/dpdangi/15min 302
 /blog/category /blog/ 301
+/services/ux-audit /ux-audit/ 301
+/services/ux-audit/ /ux-audit/ 301
+/services /hire/ 301
+/services/* /hire/ 301
+/expertise /work/ 301
+/expertise/* /work/ 301
 /home / 301

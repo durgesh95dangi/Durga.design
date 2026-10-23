@@ -4,6 +4,20 @@ export const CAL = 'https://cal.com/dpdangi/15min';
 export const EMAIL = 'patel95durgesh@gmail.com';
 export const LINKEDIN = 'https://www.linkedin.com/in/durgaprasad-ux-designer';
 export const X_URL = 'https://x.com/my_durgesh';
+export const UPWORK = 'https://www.upwork.com/freelancers/dpdangi';
+export const FIVERR = 'https://www.fiverr.com/dpdangi11';
+/* One author entity, referenced by @id from every page, so search and AI engines
+   connect every article, case study and profile to the same verified person. */
+export const PERSON_ID = SITE + '/#person';
+export const PERSON = {
+  '@type': 'Person', '@id': PERSON_ID, name: 'Durga Prasad', alternateName: ['DurgaPrasad Dangi', 'Durga'],
+  jobTitle: 'Senior Product Designer', description: 'Senior product designer with 8+ years designing fintech and B2B SaaS products.',
+  url: SITE + '/about/', image: SITE + '/assets/portrait.jpg',
+  homeLocation: { '@type': 'Place', name: 'Bengaluru, India' },
+  knowsAbout: ['Product design', 'UX design', 'SaaS UX', 'Fintech UX', 'UX audits', 'Design systems', 'Dashboard design', 'SaaS onboarding', 'Conversion rate optimization'],
+  sameAs: [LINKEDIN, X_URL, UPWORK, FIVERR]
+};
+export const personRef = { '@type': 'Person', '@id': PERSON_ID, name: 'Durga Prasad', url: SITE + '/about/' };
 export const RESUME = '/durga-prasad-resume.docx'; // source: OneDrive\Desktop\Resume.docx — replace site/durga-prasad-resume.docx to update
 
 export const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -18,8 +32,7 @@ export const accent = (text, word) => {
 };
 
 const NAV = [
-  ['Work', '/work/'], ['Services', '/services/'], ['Expertise', '/expertise/'],
-  ['Blog', '/blog/'], ['Resources', '/resources/'], ['About', '/about/']
+  ['Work', '/work/'], ['Blog', '/blog/'], ['Resources', '/resources/'], ['About', '/about/']
 ];
 const MENU_EXTRA = [['Hire me', '/hire/'], ['Tools', '/tool/'], ['Contact', '/contact/']];
 /** Minimal menu used on the homepage only (pass nav: 'minimal' to page()). */
@@ -69,9 +82,9 @@ export function footer({ kicker = 'Free · No commitment · 15 minutes', title =
       ${col('Elsewhere', [['LinkedIn', LINKEDIN], ['X (Twitter)', X_URL]])}` : variant === 'recruiter' ? `
       ${col('On this page', [['Selected work', '#work'], ['About me', '#about']])}
       ${col('Elsewhere', [['LinkedIn', LINKEDIN], ['X (Twitter)', X_URL]])}` : `
-      ${col('Explore', [['Work', '/work/'], ['Services', '/services/'], ['Expertise', '/expertise/'], ['About', '/about/'], ['Hire me', '/hire/'], ['Contact', '/contact/']])}
+      ${col('Explore', [['Work', '/work/'], ['About', '/about/'], ['Hire me', '/hire/'], ['Contact', '/contact/']])}
       ${col('Learn', [['Blog', '/blog/'], ['Resources', '/resources/'], ['Free tools', '/tool/'], ['Design system', '/design-system/']])}
-      ${col('Elsewhere', [['LinkedIn', LINKEDIN], ['X (Twitter)', X_URL], ['Fiverr', 'https://www.fiverr.com/dpdangi11']])}`}
+      ${col('Elsewhere', [['LinkedIn', LINKEDIN], ['X (Twitter)', X_URL], ['Fiverr', FIVERR]])}`}
     </div>
     <div class="footer__bottom">
       <span>© <span data-year>2026</span> Durga.design</span>
@@ -81,8 +94,35 @@ export function footer({ kicker = 'Free · No commitment · 15 minutes', title =
 </footer>`;
 }
 
-export function page({ path, title, desc, body, active, head = '', foot = {}, image = '/assets/portrait.jpg', scripts = '', noindex = false, jsonld = null, nav: navVariant = 'full', navCta = null }) {
-  const full = title.includes('Durga') ? title : `${title} | Durga.design`;
+/* ---------- SEO layer ----------
+   src/data/seo.json overrides the <title> and meta description per URL (used verbatim).
+   Every page also gets BreadcrumbList schema, and FAQPage schema whenever it shows FAQs. */
+let SEO = {};
+export const setSeo = map => { SEO = map || {}; };
+const unesc = s => s.replace(/<[^>]+>/g, '').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').trim();
+const CRUMB = { work: 'Work', blog: 'Blog', resources: 'Resources', tool: 'Tools' };
+function autoLd(path, name, body, ld) {
+  const list = ld ? (Array.isArray(ld) ? ld : [ld]) : [];
+  const types = JSON.stringify(list);
+  const out = [...list];
+  if (!/"FAQPage"/.test(types)) {
+    const qa = [...body.matchAll(/<details[^>]*><summary>([\s\S]*?)<\/summary><div>([\s\S]*?)<\/div><\/details>/g)];
+    if (qa.length) out.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: qa.map(m => ({ '@type': 'Question', name: unesc(m[1]), acceptedAnswer: { '@type': 'Answer', text: unesc(m[2]) } })) });
+  }
+  if (!/"BreadcrumbList"/.test(types) && path !== '/' && path.endsWith('/')) {
+    const segs = path.split('/').filter(Boolean); const items = [['Home', SITE + '/']]; let acc = '';
+    segs.forEach((seg, i) => { acc += '/' + seg; if (seg === 'category') return;
+      items.push([i === segs.length - 1 ? name : (CRUMB[seg] || seg), SITE + acc + '/']); });
+    out.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([n, item], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item })) });
+  }
+  return out.length > 1 ? out : (out[0] || null);
+}
+
+export function page({ path, title, desc, body, active, head = '', foot = {}, image = '/assets/portrait.jpg', scripts = '', noindex = false, jsonld = null, nav: navVariant = 'full', navCta = null, article = null, exactTitle = false }) {
+  const o = SEO[path];
+  if (o) { if (o.title) { title = o.title; exactTitle = true; } if (o.desc) desc = o.desc; }
+  const full = exactTitle || title.includes('Durga') ? title : `${title} | Durga.design`;
+  jsonld = noindex ? jsonld : autoLd(path, (o && o.crumb) || title.split(/ [|—·:] /)[0], body, jsonld);
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -91,12 +131,15 @@ export function page({ path, title, desc, body, active, head = '', foot = {}, im
 <title>${esc(full)}</title>
 <meta name="description" content="${attr(desc)}">
 <link rel="canonical" href="${SITE}${path}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="${article ? 'article' : 'website'}">
+${article ? `<meta property="article:published_time" content="${article.published}">\n<meta property="article:modified_time" content="${article.modified}">\n<meta property="article:author" content="${SITE}/about/">\n<meta property="article:section" content="${attr(article.section)}">\n` : ''}<meta property="og:site_name" content="Durga.design">
 <meta property="og:url" content="${SITE}${path}">
 <meta property="og:title" content="${attr(full)}">
 <meta property="og:description" content="${attr(desc)}">
 <meta property="og:image" content="${SITE}${image}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@my_durgesh">
+<link rel="alternate" type="application/rss+xml" title="Durga.design blog" href="/blog/feed.xml">
 <meta name="theme-color" content="#F5F2EE">
 ${noindex ? '<meta name="robots" content="noindex">\n' : ''}<link rel="icon" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">

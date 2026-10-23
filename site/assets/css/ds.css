@@ -465,7 +465,6 @@ a.card:hover .card__foot .go{transform:translate(3px,-3px)}
 .list--check li::before{content:'✓';color:var(--clr-success)}
 .list--x li::before{content:'✕';color:var(--clr-danger)}
 .list--arrow li::before{content:'↗';color:var(--clr-accent)}
-.list--dot li::before{content:'';width:8px;height:8px;background:var(--clr-accent);margin-top:.55em}
 .band-dark .list{border-color:var(--clr-border-dark)}
 .band-dark .list li{border-color:var(--clr-border-dark);color:var(--clr-ink-inv-2)}
 
@@ -666,3 +665,8 @@ a.card:hover .card__foot .go{transform:translate(3px,-3px)}
   /* Exception: the client-logo slider keeps moving (slower) — it is the section's purpose and pauses on hover */
   .marquee--ltr .marquee__track{animation-duration:60s !important;animation-iteration-count:infinite !important}
 }
+
+/* inline article illustrations */
+.prose .post-fig{margin:var(--sp-8) 0}
+.prose .post-fig img{display:block;width:100%;height:auto;border:1px solid var(--clr-border);background:var(--clr-bg)}
+.prose .post-fig figcaption{margin-top:var(--sp-2);font-size:var(--text-xs);line-height:1.5;color:var(--clr-ink-3)}

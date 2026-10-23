@@ -1,0 +1,68 @@
+{
+  "/": {
+    "title": "Durga Prasad — Senior Product Designer, Fintech & B2B SaaS",
+    "desc": "Senior product designer with 8+ years in fintech and B2B SaaS. Case studies from Dhani, EyeOnTask and Vilcart. Available for freelance and contract work.",
+    "crumb": "Home"
+  },
+  "/about/": {
+    "title": "About Durga Prasad — Product Designer, 8+ Years",
+    "desc": "Durga Prasad is a senior product designer in Bengaluru with 8+ years designing fintech and B2B SaaS. Background, how I work, and who I've worked with.",
+    "crumb": "About"
+  },
+  "/work/": {
+    "title": "Product Design Case Studies: Fintech & B2B SaaS | Durga",
+    "desc": "Product design case studies: Dhani (fintech bill payments), EyeOnTask (field service SaaS) and Vilcart (rural B2B e-commerce). Problem, decisions, results.",
+    "crumb": "Work"
+  },
+  "/work/dhani/": {
+    "title": "Dhani Case Study: Bill Payments for 50M+ Users | Durga",
+    "desc": "How a high-friction bill payment funnel became a 2-tap checkout for Dhani, one of India's largest consumer fintech and neobanking platforms.",
+    "crumb": "Dhani"
+  },
+  "/work/eyeontask/": {
+    "title": "EyeOnTask Case Study: Field Service SaaS Redesign | Durga",
+    "desc": "Redesigning the dispatcher dashboard and field worker app for EyeOnTask, a field service platform used by 1,000+ companies across 26 countries.",
+    "crumb": "EyeOnTask"
+  },
+  "/work/vilcart/": {
+    "title": "Vilcart Case Study: Rural B2B E-Commerce App | Durga",
+    "desc": "Designing a rural-first shopping and restocking app for kirana store owners in tier-3 villages across South India. Research, decisions and results.",
+    "crumb": "Vilcart"
+  },
+  "/hire/": {
+    "title": "Hire a Freelance Product Designer for SaaS & Fintech",
+    "crumb": "Hire"
+  },
+  "/ux-audit/": {
+    "title": "SaaS & Fintech UX Audit: $499, Delivered in 36 Hours",
+    "desc": "A $499 UX audit for SaaS and fintech products: a screen-by-screen video teardown, Figma fixes for your top friction points and a prioritized dev roadmap.",
+    "crumb": "UX audit"
+  },
+  "/subscription/": {
+    "title": "UX/UI Design Subscription for SaaS — From $999/mo",
+    "desc": "A senior product designer on a monthly plan: unlimited requests worked one at a time, fast turnarounds, pause or cancel anytime. From $999 a month.",
+    "crumb": "Design subscription"
+  },
+  "/saas-activation/": {
+    "title": "SaaS Activation Sprint: Turn Trial Signups into Users",
+    "crumb": "SaaS Activation Sprint"
+  },
+  "/contact/": {
+    "title": "Contact Durga Prasad — Book a 15-Minute Call",
+    "desc": "Book a free 15-minute call, order a $499 UX audit, or ask about a monthly design partnership. Email replies within 12 hours.",
+    "crumb": "Contact"
+  },
+  "/blog/": {
+    "title": "SaaS & Fintech UX Blog by Durga Prasad",
+    "desc": "Practical UX advice for SaaS and fintech teams: onboarding, dashboards, pricing pages, microcopy and trust, from a product designer with 8+ years.",
+    "crumb": "Blog"
+  },
+  "/resources/": {
+    "title": "Free UX Checklists & Audit Templates for SaaS | Durga",
+    "desc": "Free UX checklists, a heuristic audit scorecard, a dashboard usability checklist and a design token guide for SaaS and fintech teams.",
+    "crumb": "Resources"
+  },
+  "/tool/": {
+    "crumb": "Tools"
+  }
+}

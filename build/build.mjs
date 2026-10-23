@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   SITE, CAL, EMAIL, RESUME, LINKEDIN, X_URL, esc, attr, page, btn, ctas, crumbs, pageHero, shead, faq, faqLd, list, process, split,
-  statGrid, card, quoteCard, TESTIMONIALS, logoSlider
+  statGrid, card, quoteCard, TESTIMONIALS, logoSlider, PERSON, PERSON_ID, personRef, setSeo
 } from './lib.mjs';
 import { vilcartStory } from './content/vilcart.mjs';
 
@@ -14,10 +14,30 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'site');
 const data = n => JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data', n + '.json'), 'utf8'));
 const src = n => fs.readFileSync(path.join(ROOT, 'src/pages', n), 'utf8');
-const services = data('services'), work = data('work'), expertise = data('expertise'), resources = data('resources'),
+const work = data('work'), resources = data('resources'),
   tools = data('tools'), blog = data('blog'), categories = data('categories'), hubs = data('hubs');
 
+/* Scheduled publishing: a post goes live on its `published` date (India time).
+   Write posts ahead with a future date; the daily GitHub Action rebuilds and deploys,
+   so each post appears on its day. Preview a future day with BUILD_DATE=YYYY-MM-DD. */
+const TODAY = globalThis.process.env.BUILD_DATE || new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
+const scheduled = blog.filter(b => b.published > TODAY);
+for (const b of scheduled) { blog.splice(blog.indexOf(b), 1); fs.rmSync(path.join(OUT, 'blog', b.slug), { recursive: true, force: true }); }
+blog.sort((a, b) => b.published.localeCompare(a.published)); // newest first; same-day posts keep file order
+const notLive = new Set(scheduled.map(b => b.slug));
+// a live post may link to one that isn't out yet: keep the words, drop the link until it publishes
+for (const b of blog) b.body = b.body.replace(/<a href="\/blog\/([\w-]+)\/">(.*?)<\/a>/g, (m, slug, text) => notLive.has(slug) ? text : m);
+// Safety: a live post can never ship with draft placeholders; image notes are for the writer only
+for (const b of blog) {
+  const left = JSON.stringify(b).match(/\[ADD:[^\]]*\]/g);
+  if (left) throw new Error(`Live post "${b.slug}" still has ${left.length} [ADD: ...] placeholder(s). Fill them in first, or keep it in src/data/blog-drafts.json.`);
+  b.body = b.body.replace(/<!--\s*IMAGE:[\s\S]*?-->\s*/g, '');
+}
+if (scheduled.length) console.log(`Scheduled, not live yet: ${scheduled.map(b => `${b.published} ${b.slug}`).join(', ')}`);
+
+setSeo(data('seo'));
 const routes = [];
+const lastmod = {}; // route → real last-modified date (only where we actually know it)
 /* Cache-busting: every /assets/css|js link gets ?v=<content hash>, so browsers always load the latest file. */
 const assetHash = {};
 const versioned = html => html.replace(/(\/assets\/(?:css|js)\/[\w.-]+\.(?:css|js))"/g, (m, p) => {
@@ -29,7 +49,7 @@ function emit(route, html) {
   const file = route.endsWith('.html') ? path.join(OUT, route) : path.join(OUT, route, 'index.html');
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, html);
-  if (!route.endsWith('.html')) routes.push(route);
+  if (!route.endsWith('.html') && !html.includes('<meta name="robots" content="noindex">')) routes.push(route); // noindex pages stay out of the sitemap
 }
 const mainOf = html => html.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];
 const styleOf = html => (html.match(/<style>([\s\S]*?)<\/style>/) || [, ''])[1];
@@ -52,13 +72,7 @@ work.sort((a, b) => WORK_ORDER.indexOf(a.slug) - WORK_ORDER.indexOf(b.slug));
 const workBy = Object.fromEntries(work.map(w => [w.slug, w]));
 /** What work grids show: public case studies first, then NDA projects. */
 const SHOWCASE = [...work, ...ndaCases];
-// expertise pages may only point at case studies that have a public page
-expertise.forEach(e => { e.proof = e.proof.filter(p => workBy[p.href.split('/').pop()]); });
 const blogBy = Object.fromEntries(blog.map(b => [b.slug, b]));
-const SERVICE_ORDER = ['ux-audit', 'saas-product-design', 'product-redesign', 'design-partner'];
-services.sort((a, b) => SERVICE_ORDER.indexOf(a.slug) - SERVICE_ORDER.indexOf(b.slug));
-const EXP_ORDER = ['saas-ux', 'fintech-ux', 'ai-product-design', 'dashboard-ux', 'design-systems'];
-expertise.sort((a, b) => EXP_ORDER.indexOf(a.slug) - EXP_ORDER.indexOf(b.slug));
 const RES_ORDER = ['ux-checklist', 'ux-audit-template', 'dashboard-checklist', 'design-system-resources'];
 resources.sort((a, b) => RES_ORDER.indexOf(a.slug) - RES_ORDER.indexOf(b.slug));
 const RES_KIND = { 'ux-checklist': 'Checklist', 'ux-audit-template': 'Template', 'dashboard-checklist': 'Checklist', 'design-system-resources': 'Guide' };
@@ -168,7 +182,7 @@ const faqSection = (items, title = 'Questions, <em>answered</em>.') => items.len
     desc: 'Durga is a senior product designer with 8+ years designing fintech and B2B SaaS products, with teams at Vestas, Dhani and EyeOnTask.',
     head: '<link rel="stylesheet" href="/assets/css/home.css">\n', body, nav: 'minimal', navCta: { label: 'Download resume', href: RESUME, download: true },
     foot: { variant: 'recruiter', kicker: 'Open to senior product design roles', title: 'Hiring a product<br>designer? Let’s <em>talk</em>.' },
-    jsonld: { '@context': 'https://schema.org', '@type': 'Person', name: 'Durga Prasad', jobTitle: 'Senior Product Designer', url: SITE, sameAs: [LINKEDIN, X_URL] }
+    jsonld: { '@context': 'https://schema.org', '@graph': [{ '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/', name: 'Durga.design', inLanguage: 'en', publisher: { '@id': PERSON_ID } }, PERSON] }
   }));
   const ds = src('design-system.html');
   emit('/design-system/', page({
@@ -211,6 +225,8 @@ document.querySelectorAll('.sw').forEach(b => b.addEventListener('click', async 
   </div>
 </section>`;
   emit('/work/', page({ path: '/work/', title: h.title, desc: h.desc, active: '/work/', body,
+    jsonld: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Product design case studies', url: SITE + '/work/', author: personRef,
+      hasPart: work.map(w => ({ '@type': 'Article', headline: `${w.client}: ${w.h1}`, url: `${SITE}/work/${w.slug}/` })) },
     foot: { kicker: 'Free · 15 minutes', title: 'Have a complex <em>product</em><br>challenge? Let\'s talk.' } }));
 
   // Case study pages
@@ -250,7 +266,10 @@ document.querySelectorAll('.sw').forEach(b => b.addEventListener('click', async 
           <ol class="outcomes rv" style="margin-top:var(--sp-8)">${w.results.map(r => `<li><span><b>${esc(r.value)}</b> — ${esc(r.label)}</span></li>`).join('')}</ol>
           ${w.quote ? `<blockquote class="pull rv" style="margin-top:var(--sp-12)">${esc(w.quote.text)}</blockquote><p class="t-caption rv" style="margin-top:var(--sp-3);padding-left:var(--sp-6)">— ${esc(w.quote.author)}, ${esc(w.quote.role)}</p>` : ''}
         </section>`;
-      const meta = story ? story.meta : [['Client', w.client], ['Duration', w.duration], ['Platform', w.platform], ['Focus', w.category]];
+      // role and years come from the About page timeline (Durga's source of truth)
+      const YEARS = { dhani: '2022–2024', vilcart: '2020–2022' }, ROLE = { dhani: 'Lead Product Designer' };
+      const meta = story ? [...story.meta, ['Years', YEARS[w.slug]]].filter(([, v]) => v)
+        : [['Client', w.client], ['My role', ROLE[w.slug]], ['Years', YEARS[w.slug]], ['Duration', w.duration], ['Platform', w.platform], ['Focus', w.category]].filter(([, v]) => v);
       const stats = story ? story.stats : w.results;
       body = `
   <section class="cs-hero">
@@ -265,7 +284,7 @@ document.querySelectorAll('.sw').forEach(b => b.addEventListener('click', async 
     </div>
   </section>
   <div class="container"><figure class="cs-cover rv" data-reveal-img><img src="${story ? story.cover : w.cover}" alt="${attr(w.client)} interface design"></figure></div>
-  <section class="section-sm"><div class="container">${statGrid(stats)}</div></section>
+  <section class="section-sm"><div class="container"><p class="t-label eyebrow rv">${story ? 'Project targets' : 'Results at a glance'}</p>${statGrid(stats)}</div></section>
   <section class="section-md" style="padding-top:var(--sp-12)">
     <div class="container cs-layout">
       <aside class="cs-toc" aria-label="On this page"><p class="t-label">On this page</p><ol>${toc.map(([id, l]) => `<li><a href="#${id}">${esc(l)}</a></li>`).join('')}</ol></aside>
@@ -276,63 +295,11 @@ document.querySelectorAll('.sw').forEach(b => b.addEventListener('click', async 
     }
     emit(`/work/${w.slug}/`, page({
       path: `/work/${w.slug}/`, title: w.title, desc: w.desc, active: '/work/', body, image: WORK_CARD[w.slug].img,
+      jsonld: { '@context': 'https://schema.org', '@type': 'Article', headline: `${w.client}: ${w.h1}`, description: w.desc, image: SITE + WORK_CARD[w.slug].img,
+        author: personRef, publisher: personRef, url: `${SITE}/work/${w.slug}/`, about: { '@type': 'Organization', name: w.client }, genre: 'Product design case study' },
       foot: { kicker: 'Free · 15 minutes', title: 'Need this kind of<br><em>thinking</em>? Let\'s talk.' }
     }));
   }
-}
-
-/* ======================================================================
-   SERVICES
-   ====================================================================== */
-{
-  const h = hubs.services;
-  const block = (s, i) => `<article class="split" id="${s.slug}">
-  <div class="split__head">
-    <p class="cs-section__k rv">${String(i + 1).padStart(2, '0')} · ${esc(s.badge)}</p>
-    <h2 class="t-h3 rv">${esc(s.h1)}</h2>
-    <div class="tags rv" style="margin-top:var(--sp-4)"><span class="tag">${esc(s.price)}</span><span class="tag tag-neutral">${esc(s.duration)}</span></div>
-  </div>
-  <div class="rv" style="--i:1">
-    <p class="t-lead" style="margin-bottom:var(--sp-4)">${esc(s.lead)}</p>
-    <p class="t-body" style="margin-bottom:var(--sp-6);max-width:var(--measure)">${esc(s.body)}</p>
-    ${list(s.deliverables.slice(0, 3))}
-    <div style="display:flex;flex-wrap:wrap;gap:var(--sp-4);margin-top:var(--sp-8)">${btn('See details', `/services/${s.slug}/`, 'primary')}${btn(s.ctas[0].label, s.ctas[0].href, 'secondary')}</div>
-  </div>
-</article>`;
-  const body = `${pageHero({ eyebrow: h.eyebrow, title: 'Senior design craft, <em>zero</em> agency fluff.', lead: h.lead,
-    actions: btn('Book a 15-min call', CAL, 'primary', 'lg') + btn('Compare plans', '/subscription/', 'secondary', 'lg') })}
-<section class="section-md" style="padding-top:var(--sp-8)"><div class="container">${services.map(block).join('')}</div></section>`;
-  emit('/services/', page({ path: '/services/', title: h.title, desc: h.desc, active: '/services/', body,
-    foot: { kicker: 'Free · 15 minutes', title: 'Not sure which<br><em>fits</em>? Let\'s talk.' } }));
-
-  services.forEach((s, i) => {
-    const body = `${pageHero({ crumbs: [['Services', '/services/'], [s.h1, '']],
-      tags: `<span class="tag">${esc(s.price)}</span><span class="tag tag-neutral">${esc(s.duration)}</span><span class="tag tag-neutral">${esc(s.badge)}</span>`,
-      title: esc(s.h1), lead: s.lead, actions: ctas(s.ctas) })}
-<section class="section-md" style="padding-top:var(--sp-8)">
-  <div class="container">
-    ${split('Overview', 'What this engagement is.', `<p class="t-lead" style="max-width:var(--measure)">${esc(s.body)}</p>`)}
-    ${split('Who it’s for', 'Ideal if you are…', list(s.ideal, 'arrow'))}
-    ${split('What you get', 'Delivered to you.', list(s.deliverables))}
-    ${split('Outcomes', 'What changes.', list(s.outcomes, 'dot'))}
-  </div>
-</section>
-<section class="section-md band-alt">
-  <div class="container">
-    ${shead('Process', 'How it <em>works</em>.')}
-    ${process(s.process)}
-  </div>
-</section>
-${faqSection(s.faqs)}
-<section class="section-sm" style="padding-top:0">
-  <div class="container">
-    <p class="t-label eyebrow rv">Other services</p>
-    <div class="card-grid">${services.filter(o => o !== s).map((o, j) => card({ href: `/services/${o.slug}/`, kicker: `<b>${esc(o.price)}</b><span>${esc(o.duration)}</span>`, title: o.h1, text: o.lead, foot: 'See details' }).replace('class="card rv"', `class="card rv" style="--i:${j}"`)).join('')}</div>
-  </div>
-</section>`;
-    emit(`/services/${s.slug}/`, page({ path: `/services/${s.slug}/`, title: s.title, desc: s.desc, active: '/services/', body, jsonld: faqLd(s.faqs),
-      foot: { kicker: esc(s.price) + ' · ' + esc(s.duration), title: esc(s.cta.title).replace('started', '<em>started</em>') } }));
-  });
 }
 
 /* ======================================================================
@@ -387,7 +354,9 @@ ${faqSection([
     { q: "What's your design process like?", a: "I focus on business logic first. Then I prototype in Figma and hand off pixel-perfect specs with Loom videos. Your engineers won't have to guess." },
     { q: 'Do you work with international clients?', a: "Yes. I'm based in Bengaluru but work mostly with US and European startups. It's fully async. I use Figma, Notion, and Loom to move fast without endless meetings." },
     { q: 'What industries do you have experience in?', a: 'Fintech, B2B SaaS, and Enterprise. I also have deep roots in Agri-tech and Field Service Management. Complex industries are where I thrive.' }])}`;
-  emit('/subscription/', page({ path: '/subscription/', title: h.title, desc: h.desc, active: '/services/', body,
+  emit('/subscription/', page({ path: '/subscription/', title: h.title, desc: h.desc, body,
+    jsonld: { '@context': 'https://schema.org', '@type': 'Service', name: 'DesignStream UX/UI design subscription', serviceType: 'Product design subscription', provider: personRef, areaServed: 'Worldwide', url: SITE + '/subscription/',
+      offers: [['DesignStream Lite', 999], ['DesignStream Growth', 2999]].map(([name, price]) => ({ '@type': 'Offer', name, price, priceCurrency: 'USD', description: 'Per month. Pause or cancel anytime.' })) },
     foot: { kicker: 'Pause or cancel anytime', title: 'A senior designer,<br><em>on tap</em>.' } }));
 
   const a = hubs['ux-audit'];
@@ -433,53 +402,16 @@ ${testimonials('Founders who stopped <em>guessing</em>.')}
 ${faqSection([
     { q: 'What do you need from me to get started?', a: 'Just a link to your product, any test credentials needed to log in, and a brief description of who your target user is. Analytics access (Mixpanel, GA4) is a bonus, but not required.' },
     { q: 'How is this different from a normal UX design project?', a: 'A normal UX project takes months and costs $10k+. This is a surgical strike: fast, affordable, and focused on high-impact conversion levers rather than reinventing your entire design system.' },
-    { q: 'Do you also write the code?', a: 'No. I provide the design solutions, wireframes and UX logic. Your developers implement the changes, and the roadmap is structured so they can execute without ambiguity.' }])}`;
-  emit('/ux-audit/', page({ path: '/ux-audit/', title: a.title, desc: a.desc, active: '/services/', body: ab,
+    { q: 'Do you also write the code?', a: 'No. I provide the design solutions, wireframes and UX logic. Your developers implement the changes, and the roadmap is structured so they can execute without ambiguity.' },
+    { q: 'What exactly is included in the $499 UX audit?', a: 'A screen-by-screen video teardown of your product, low-fidelity wireframe redesigns in Figma for your core screens, a prioritised dev roadmap in Notion graded by impact vs. effort, and a 30-minute strategy call to go through it.' },
+    { q: 'How long does the UX audit take?', a: 'You get the full audit within 36 hours of sending your product link and any login details I need.' },
+    { q: 'What if the audit doesn’t help?', a: 'It comes with a 100% money-back guarantee. If it doesn’t give you clear, useful fixes, you get your money back.' },
+    { q: 'How is a UX audit different from usability testing?', a: 'An audit is an expert review of your product against proven usability principles. Usability testing watches real users try tasks. An audit is faster and cheaper and finds most of the obvious friction; testing shows behaviour nobody predicted. They work well together.' },
+    { q: 'Who is the UX audit for?', a: 'SaaS and fintech founders and product teams who already get traffic or signups but lose people in onboarding, pricing or core workflows, and want to know exactly what to fix first.' }])}`;
+  emit('/ux-audit/', page({ path: '/ux-audit/', title: a.title, desc: a.desc, body: ab,
+    jsonld: { '@context': 'https://schema.org', '@type': 'Service', name: 'SaaS & fintech UX audit', serviceType: 'UX audit', provider: personRef, areaServed: 'Worldwide', url: SITE + '/ux-audit/',
+      offers: { '@type': 'Offer', price: 499, priceCurrency: 'USD', description: 'Fixed scope, delivered in 36 hours.' } },
     foot: { kicker: '$499 · 36 hours · money-back guarantee', title: 'Ready to stop<br>losing <em>users</em>?' } }));
-}
-
-/* ======================================================================
-   EXPERTISE
-   ====================================================================== */
-{
-  const h = hubs.expertise;
-  const caseLabel = p => { const w = workBy[p.href.split('/').pop()]; return w ? `${w.client} — ${w.h1}` : p.raw.replace(/↗$/, ''); };
-  const pillar = (e, i) => `<article class="split" id="${e.slug}">
-  <div class="split__head">
-    <p class="cs-section__k rv">Pillar ${String(i + 1).padStart(2, '0')}</p>
-    <h2 class="t-h3 rv">${esc(e.h1)}</h2>
-    <p class="rv">${esc(e.lead)}</p>
-  </div>
-  <div class="rv" style="--i:1">
-    <p class="t-body" style="max-width:var(--measure);margin-bottom:var(--sp-6)">${esc(e.body)}</p>
-    ${statGrid(e.stats)}
-    <div style="margin-top:var(--sp-6)">${list(e.deliverables.slice(0, 4), 'arrow')}</div>
-    <div style="display:flex;flex-wrap:wrap;gap:var(--sp-4);margin-top:var(--sp-8)">${btn('Explore this domain', `/expertise/${e.slug}/`, 'primary')}${e.proof[0] ? btn('Case: ' + workBy[e.proof[0].href.split('/').pop()]?.client, e.proof[0].href + '/', 'secondary') : ''}</div>
-  </div>
-</article>`;
-  emit('/expertise/', page({ path: '/expertise/', title: h.title, desc: h.desc, active: '/expertise/',
-    body: `${pageHero({ eyebrow: h.eyebrow, title: 'Built for complexity, designed for <em>clarity</em>.', lead: h.lead })}
-<section class="section-md" style="padding-top:var(--sp-8)"><div class="container">${expertise.map(pillar).join('')}</div></section>`,
-    foot: { kicker: 'Free · 15 minutes', title: 'Need expertise for<br>your <em>product</em>?' } }));
-
-  for (const e of expertise) {
-    const body = `${pageHero({ crumbs: [['Expertise', '/expertise/'], [e.h1, '']], eyebrow: 'Specialised domain', title: esc(e.h1), lead: e.lead,
-      actions: ctas(e.cta.ctas.map(c => ({ ...c, href: c.href === '/ux-audit' ? '/ux-audit/' : c.href }))) })}
-<section class="section-sm"><div class="container">${statGrid(e.stats)}</div></section>
-<section class="section-md" style="padding-top:var(--sp-8)">
-  <div class="container">
-    ${split('Context', 'Why it matters.', `<p class="t-lead" style="max-width:var(--measure)">${esc(e.body)}</p>`)}
-    ${split('Bottlenecks', 'Friction I solve.', list(e.bottlenecks, 'x'))}
-    ${split('Principles', 'Rules I design by.', `<ol class="outcomes" style="grid-template-columns:1fr">${e.principles.map(p => `<li><span>${esc(p)}</span></li>`).join('')}</ol>`)}
-    ${split('Deliverables', 'What you receive.', list(e.deliverables))}
-    ${e.proof.length === 0 ? '' : split('Proof', 'Proven in production.', `<div class="card-grid card-grid--2">${e.proof.map(p => { const w = workBy[p.href.split('/').pop()]; return card({ href: p.href + '/', media: w ? WORK_CARD[w.slug].img : '', kicker: w ? `<b>${esc(w.category)}</b>` : '', title: caseLabel(p), text: w ? w.impact : '', foot: 'Read case' }); }).join('')}</div>`)}
-    ${split('Reading', 'Masterclass deep dives.', `<div class="card-grid card-grid--2">${e.reading.map(r => { const b = blogBy[r.href.split('/').pop()]; return b ? postCard(b) : ''; }).join('')}</div>`)}
-  </div>
-</section>
-${faqSection(e.faqs)}`;
-    emit(`/expertise/${e.slug}/`, page({ path: `/expertise/${e.slug}/`, title: e.title, desc: e.desc, active: '/expertise/', body, jsonld: faqLd(e.faqs),
-      foot: { kicker: 'Free · 15 minutes', title: 'Ready to remove the<br><em>friction</em>?' } }));
-  }
 }
 
 /* ======================================================================
@@ -540,6 +472,7 @@ ${faqSection(e.faqs)}`;
 </section>`;
   emit('/about/', page({ path: '/about/', title: h.title, desc: h.desc, active: '/about/', body,
     head: '<style>@media(min-width:900px){[data-about-grid]{grid-template-columns:7fr 5fr}}</style>\n',
+    jsonld: { '@context': 'https://schema.org', '@type': 'ProfilePage', url: SITE + '/about/', mainEntity: PERSON },
     foot: { kicker: 'Free · 15 minutes', title: 'Have a product<br><em>challenge</em>? Let’s talk.' } }));
 
   const c = hubs.contact;
@@ -548,7 +481,7 @@ ${faqSection(e.faqs)}`;
   <div class="container">
     <div class="card-grid">
       ${card({ href: CAL, icon: '01', kicker: '<b>Fastest</b><span>Free</span>', title: '15-minute intro call', text: 'Talk through your roadmap, redesign challenges or partnership needs on Zoom or Google Meet.', foot: 'Pick a time on Cal.com' })}
-      ${card({ href: '/services/ux-audit/', icon: '02', kicker: '<b>Fixed scope</b><span>$499</span>', title: 'SaaS UX audit', text: 'A 45-minute video teardown and structured Figma issue matrix that finds conversion leaks and friction.', foot: 'Order the audit' })}
+      ${card({ href: '/ux-audit/', icon: '02', kicker: '<b>Fixed scope</b><span>$499</span>', title: 'SaaS UX audit', text: 'A 45-minute video teardown and structured Figma issue matrix that finds conversion leaks and friction.', foot: 'Order the audit' })}
       ${card({ href: '/subscription/', icon: '03', kicker: '<b>Monthly</b><span>From $999/mo</span>', title: 'Design partner retainer', text: 'A dedicated design partner for funded startups. Unlimited requests, 48-hour turnarounds, pause anytime.', foot: 'View plans' })}
     </div>
   </div>
@@ -574,8 +507,18 @@ ${faqSection([
     { q: 'What timezones do you support?', a: 'I work from UTC+5:30 with good overlap across US East Coast, US West Coast and Central European working hours.' },
     { q: 'Can I reach out directly via email or social?', a: 'Yes. Email ' + EMAIL + ' or DM @my_durgesh on X. I reply to qualified inquiries within 12 hours.' }], 'Common <em>questions</em>.')}`;
   emit('/contact/', page({ path: '/contact/', title: c.title, desc: c.desc, active: '/contact/', body: cbody,
+    jsonld: { '@context': 'https://schema.org', '@type': 'ContactPage', url: SITE + '/contact/', mainEntity: personRef },
     foot: { kicker: 'Instant scheduling', title: 'Skip the email.<br>Grab <em>15 minutes</em>.' } }));
 }
+
+const fmtDate = d => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+const words = html => html.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+const authorBox = p => `<div class="callout rv" style="margin-top:var(--sp-16)">
+  <p class="callout__label">About the author</p>
+  <div class="byline"><img src="/assets/portrait.jpg" alt="Durga Prasad"><div><b><a href="/about/" rel="author">Durga Prasad</a></b><span>Senior Product Designer · 8+ years in fintech &amp; B2B SaaS</span></div></div>
+  <p class="t-body">I design and audit SaaS and fintech products, with teams at Vestas, Dhani and EyeOnTask. Published <time datetime="${p.published}">${fmtDate(p.published)}</time> · last updated <time datetime="${p.updated}">${fmtDate(p.updated)}</time>.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:var(--sp-2)">${btn('About me', '/about/', 'secondary', 'sm')}${btn('LinkedIn', LINKEDIN, 'secondary', 'sm')}</div>
+</div>`;
 
 /* ======================================================================
    BLOG
@@ -601,7 +544,10 @@ ${faqSection([
     <div class="card-grid">${rest.map(postCard).join('')}</div>
   </div>
 </section>`;
+  lastmod['/blog/'] = blog.map(b => b.updated).sort().pop();
   emit('/blog/', page({ path: '/blog/', title: h.title, desc: h.desc, active: '/blog/', body,
+    jsonld: { '@context': 'https://schema.org', '@type': 'Blog', '@id': SITE + '/blog/#blog', url: SITE + '/blog/', name: 'Durga.design blog', author: personRef, publisher: personRef,
+      blogPost: blog.map(b => ({ '@type': 'BlogPosting', headline: b.title, url: `${SITE}/blog/${b.slug}/`, datePublished: b.published, dateModified: b.updated })) },
     foot: { kicker: 'Free · 15 minutes', title: 'Let me find the<br>hidden <em>leaks</em>.' } }));
 
   for (const c of usedCats) {
@@ -614,6 +560,8 @@ ${faqSection([
   </div>
 </section>`;
     emit(`/blog/category/${c.slug}/`, page({ path: `/blog/category/${c.slug}/`, title: c.title, desc: c.desc, active: '/blog/', body,
+      noindex: posts.length === 0, // thin, empty pages stay out of search until they have posts
+      jsonld: posts.length ? { '@context': 'https://schema.org', '@type': 'CollectionPage', name: c.label, url: `${SITE}/blog/category/${c.slug}/`, isPartOf: { '@id': SITE + '/blog/#blog' } } : null,
       foot: { kicker: 'Free · 15 minutes', title: `Need hands-on help with<br><em>${esc(c.label)}</em>?` } }));
   }
 
@@ -623,10 +571,10 @@ ${faqSection([
     const body = `<section class="article-hero">
   <div class="container">
     ${crumbs([['Blog', '/blog/'], [p.categoryLabel, `/blog/category/${p.category}/`], ['Article', '']])}
-    <div class="page-hero__meta fade-in" style="--d:.05s"><a class="tag" href="/blog/category/${p.category}/">${esc(p.categoryLabel)}</a><span>${esc(p.readTime)}</span></div>
+    <div class="page-hero__meta fade-in" style="--d:.05s"><a class="tag" href="/blog/category/${p.category}/">${esc(p.categoryLabel)}</a><span>${esc(p.readTime)}</span><span>Updated <time datetime="${p.updated}">${fmtDate(p.updated)}</time></span></div>
     <h1 class="t-h1 article-hero__title fade-in" style="--d:.1s">${esc(p.title)}</h1>
     <p class="t-lead fade-in" style="--d:.2s;max-width:62ch">${esc(p.lead)}</p>
-    <div class="byline fade-in" style="--d:.3s;margin-top:var(--sp-6)"><img src="/assets/portrait.jpg" alt=""><div><b>Durga Prasad</b><span>Senior Product Designer · Fintech &amp; B2B SaaS</span></div></div>
+    <div class="byline fade-in" style="--d:.3s;margin-top:var(--sp-6)"><img src="/assets/portrait.jpg" alt=""><div><b><a href="/about/" rel="author">Durga Prasad</a></b><span>Senior Product Designer · 8+ years in fintech &amp; B2B SaaS</span></div></div>
     <figure class="article-hero__cover rv" data-reveal-img><img src="${p.hero}" alt="${attr(p.heroAlt)}"></figure>
   </div>
 </section>
@@ -637,6 +585,7 @@ ${faqSection([
       ${p.takeaways.length ? `<div class="rv" style="margin-bottom:var(--sp-10)"><p class="t-label eyebrow">Key takeaways</p>${list(p.takeaways)}</div>` : ''}
       <div class="prose prose-lg">${p.body}</div>
       ${p.faqs.length ? `<div style="margin-top:var(--sp-16)"><p class="t-label eyebrow rv">FAQ</p>${faq(p.faqs)}</div>` : ''}
+      ${authorBox(p)}
     </div>
     <aside class="article__aside">
       <div class="callout rv">
@@ -665,9 +614,16 @@ ${faqSection([
     <div class="card-grid">${related.map(postCard).join('')}</div>
   </div>
 </section>`;
+    lastmod[`/blog/${p.slug}/`] = p.updated;
     emit(`/blog/${p.slug}/`, page({
-      path: `/blog/${p.slug}/`, title: p.title, desc: p.desc, active: '/blog/', body, image: p.hero,
-      jsonld: [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.desc, image: SITE + p.hero, author: { '@type': 'Person', name: 'Durga Prasad', url: SITE }, mainEntityOfPage: url }, faqLd(p.faqs)].filter(Boolean),
+      path: `/blog/${p.slug}/`, title: p.seoTitle || p.title, exactTitle: !!p.seoTitle, desc: p.desc, active: '/blog/', body, image: p.hero,
+      article: { published: p.published, modified: p.updated, section: p.categoryLabel },
+      jsonld: [{ '@context': 'https://schema.org', '@type': 'BlogPosting', '@id': url + '#article', headline: p.title, description: p.desc, image: SITE + p.hero,
+        datePublished: p.published, dateModified: p.updated, author: personRef, publisher: personRef, inLanguage: 'en',
+        articleSection: p.categoryLabel, wordCount: words(p.body), mainEntityOfPage: url, isPartOf: { '@id': SITE + '/blog/#blog' },
+        abstract: p.quickAnswer, ...(p.keywords ? { keywords: [p.keywords.primary, ...p.keywords.secondary].join(', ') } : {}) },
+        { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [['Blog', SITE + '/blog/'], [p.categoryLabel, `${SITE}/blog/category/${p.category}/`], [p.title, url]].map(([name, item], i) => ({ '@type': 'ListItem', position: i + 1, name, item })) },
+        faqLd(p.faqs)].filter(Boolean),
       foot: { kicker: '$499 UX audit · 36 hours', title: 'Want this fixed in<br>your <em>product</em>?' }
     }));
   });
@@ -692,6 +648,7 @@ ${faqSection([
   </div>
 </section>`;
   emit('/resources/', page({ path: '/resources/', title: h.title, desc: h.desc, active: '/resources/', body,
+    jsonld: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Free UX resources', url: SITE + '/resources/', author: personRef },
     foot: { kicker: '$499 UX audit · 36 hours', title: 'Need an expert eye<br>on your <em>product</em>?' } }));
 
   for (const r of resources) {
@@ -703,7 +660,7 @@ ${faqSection([
     <div class="ck-bar rv">
       <div><p class="t-caption">Audit score</p><div class="ck-bar__score"><span data-ck-done>0</span>/${total}</div></div>
       <div class="ck-bar__meter" aria-hidden="true"><i></i></div>
-      <div style="display:flex;gap:var(--sp-2)"><button class="btn btn-secondary btn-sm" type="button" data-ck-reset>Reset</button>${btn('Get an expert audit', '/services/ux-audit/', 'primary', 'sm')}</div>
+      <div style="display:flex;gap:var(--sp-2)"><button class="btn btn-secondary btn-sm" type="button" data-ck-reset>Reset</button>${btn('Get an expert audit', '/ux-audit/', 'primary', 'sm')}</div>
     </div>
     ${r.groups.map((g, gi) => `<div class="ck-group rv">
       <div class="ck-group__head"><h2 class="t-h3">${gi + 1}. ${esc(g.title)}</h2><span>0/${g.items.length} passed</span></div>
@@ -725,6 +682,7 @@ ${faqSection([
   </div>
 </section>`;
     emit(`/resources/${r.slug}/`, page({ path: `/resources/${r.slug}/`, title: r.title, desc: r.desc, active: '/resources/', body,
+      jsonld: { '@context': 'https://schema.org', '@type': 'CreativeWork', name: r.h1, description: r.desc, url: `${SITE}/resources/${r.slug}/`, author: personRef, isAccessibleForFree: true, learningResourceType: r.kind || 'Checklist' },
       foot: { kicker: '$499 · 45-minute video teardown', title: 'Want an expert<br><em>audit</em> instead?' } }));
   }
 }
@@ -750,7 +708,8 @@ ${faqSection([
     ${split('About', 'What these tools are.', `<div class="prose"><p>Free browser utilities for product designers and front-end engineers working on fintech and B2B SaaS interfaces.</p><p>Check WCAG contrast, convert colour formats, preview colour vision deficiency, build type and spacing scales, solve aspect ratios, and copy CSS for grid, flexbox, radius, shadow and gradients. Everything runs locally in your browser.</p></div>`)}
   </div>
 </section>`;
-  emit('/tool/', page({ path: '/tool/', title: h.title, desc: h.desc, active: '/tool/', body }));
+  emit('/tool/', page({ path: '/tool/', title: h.title, desc: h.desc, active: '/tool/', body,
+    jsonld: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Free browser design tools', url: SITE + '/tool/', author: personRef } }));
 
   for (const t of tools) {
     const others = tools.filter(o => o !== t && TOOL_CAT[o.slug] === TOOL_CAT[t.slug]).concat(tools.filter(o => TOOL_CAT[o.slug] !== TOOL_CAT[t.slug])).slice(0, 3);
@@ -773,7 +732,9 @@ ${faqSection(t.faqs, 'FAQ.')}
     <div class="card-grid">${others.map(toolCard).join('')}</div>
   </div>
 </section>`;
-    emit(`/tool/${t.slug}/`, page({ path: `/tool/${t.slug}/`, title: t.title, desc: t.desc, active: '/tool/', body, jsonld: faqLd(t.faqs),
+    emit(`/tool/${t.slug}/`, page({ path: `/tool/${t.slug}/`, title: t.title, desc: t.desc, active: '/tool/', body,
+      jsonld: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: t.name, description: t.desc, url: `${SITE}/tool/${t.slug}/`, applicationCategory: 'DesignApplication', operatingSystem: 'Any (runs in the browser)',
+        isAccessibleForFree: true, offers: { '@type': 'Offer', price: 0, priceCurrency: 'USD' }, author: personRef }, faqLd(t.faqs)].filter(Boolean),
       scripts: '<script src="/assets/js/tools.js" defer></script>\n' }));
   }
 }
@@ -1078,8 +1039,8 @@ ${faqSection(t.faqs, 'FAQ.')}
   <div class="container">
     ${shead('Ways to hire me', 'Pick the engagement that <em>fits</em>.')}
     <div class="card-grid">
-      ${card({ href: '/services/ux-audit/', icon: '01', kicker: '<b>$499</b><span>36 hours</span>', title: 'SaaS & fintech UX audit', text: 'A screen-by-screen video teardown, Figma fixes for your top friction points, and a prioritised dev roadmap.', foot: 'See the audit' })}
-      ${card({ href: '/services/saas-product-design/', icon: '02', kicker: '<b>Project</b><span>3–6 weeks</span>', title: '0-to-1 product design', text: 'End-to-end flows, UI and an interactive prototype for a new product or a major feature.', foot: 'See the project scope' })}
+      ${card({ href: '/ux-audit/', icon: '01', kicker: '<b>$499</b><span>36 hours</span>', title: 'SaaS & fintech UX audit', text: 'A screen-by-screen video teardown, Figma fixes for your top friction points, and a prioritised dev roadmap.', foot: 'See the audit' })}
+      ${card({ href: '/contact/', icon: '02', kicker: '<b>Project</b><span>3–6 weeks</span>', title: '0-to-1 product design', text: 'End-to-end flows, UI and an interactive prototype for a new product or a major feature.', foot: 'See the project scope' })}
       ${card({ href: '/subscription/', icon: '03', kicker: '<b>From $999/mo</b><span>Pause anytime</span>', title: 'Design partner retainer', text: 'A senior designer on tap. Unlimited requests worked one at a time, with fast turnarounds.', foot: 'See plans' })}
     </div>
   </div>
@@ -1116,9 +1077,45 @@ fs.writeFileSync(path.join(OUT, '_redirects'), [
   '/work/pureblue/ /work/ 301',
   `/book-a-call ${CAL} 302`,
   '/blog/category /blog/ 301',
+  '/services/ux-audit /ux-audit/ 301',
+  '/services/ux-audit/ /ux-audit/ 301',
+  '/services /hire/ 301',
+  '/services/* /hire/ 301',
+  '/expertise /work/ 301',
+  '/expertise/* /work/ 301',
   '/home / 301'
 ].join('\n') + '\n');
 fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /design-system/\nSitemap: ${SITE}/sitemap.xml\n`);
-const today = new Date().toISOString().slice(0, 10);
-fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.filter(r => r !== '/design-system/').map(r => `  <url><loc>${SITE}${r}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+// lastmod only where the date is real: a fake "today" on every page teaches Google to ignore it
+fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.filter(r => r !== '/design-system/').map(r => `  <url><loc>${SITE}${r}</loc>${lastmod[r] ? `<lastmod>${lastmod[r]}</lastmod>` : ''}</url>`).join('\n')}\n</urlset>\n`);
+// RSS: lets aggregators, newsletters and AI crawlers discover new posts the day they ship
+const xml = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const byNew = [...blog].sort((a, b) => b.published.localeCompare(a.published));
+fs.writeFileSync(path.join(OUT, 'blog', 'feed.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel>
+<title>Durga.design blog</title><link>${SITE}/blog/</link><description>${xml(hubs.blog.desc)}</description><language>en</language>
+<atom:link href="${SITE}/blog/feed.xml" rel="self" type="application/rss+xml"/>
+${byNew.map(b => `<item><title>${xml(b.title)}</title><link>${SITE}/blog/${b.slug}/</link><guid>${SITE}/blog/${b.slug}/</guid><pubDate>${new Date(b.published + 'T00:00:00Z').toUTCString()}</pubDate><description>${xml(b.quickAnswer || b.desc)}</description></item>`).join('\n')}
+</channel></rss>\n`);
+// llms.txt: a plain-text map of the site for AI tools that look for one (optional, harmless)
+fs.writeFileSync(path.join(OUT, 'llms.txt'), `# Durga.design
+
+> Portfolio and blog of Durga Prasad, a senior product designer with 8+ years designing fintech and B2B SaaS products (teams at Vestas, Dhani, EyeOnTask). Based in Bengaluru, India; works with clients worldwide.
+
+## Case studies
+${work.map(w => `- [${w.client}: ${w.h1}](${SITE}/work/${w.slug}/)`).join('\n')}
+
+## Articles
+${byNew.map(b => `- [${b.title}](${SITE}/blog/${b.slug}/): ${b.quickAnswer || b.desc}`).join('\n')}
+
+## Free resources and tools
+- [UX resources, checklists and templates](${SITE}/resources/)
+- [14 free browser design tools](${SITE}/tool/)
+
+## Work with Durga
+- [About](${SITE}/about/)
+- [Hire for freelance work](${SITE}/hire/)
+- [UX audit for SaaS and fintech](${SITE}/ux-audit/)
+- [Contact](${SITE}/contact/)
+`);
 console.log(`Built ${routes.length} pages → ${OUT}`);
