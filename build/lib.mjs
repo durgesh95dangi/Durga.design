@@ -18,6 +18,7 @@ export const PERSON = {
   sameAs: [LINKEDIN, X_URL, UPWORK, FIVERR]
 };
 export const personRef = { '@type': 'Person', '@id': PERSON_ID, name: 'Durga Prasad', url: SITE + '/about/' };
+export const GA_ID = 'G-Y49BPLRWGZ'; // Google Analytics 4 measurement ID
 export const RESUME = '/durga-prasad-resume.docx'; // source: OneDrive\Desktop\Resume.docx — replace site/durga-prasad-resume.docx to update
 
 export const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -128,6 +129,8 @@ export function page({ path, title, desc, body, active, head = '', foot = {}, im
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=${GA_ID}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');</script>
 <title>${esc(full)}</title>
 <meta name="description" content="${attr(desc)}">
 <link rel="canonical" href="${SITE}${path}">
