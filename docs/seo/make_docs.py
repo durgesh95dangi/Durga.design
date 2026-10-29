@@ -3,11 +3,11 @@ import json,re,os,html as H
 SITE='https://durga.design'
 drafts=json.load(open('src/data/blog-drafts.json',encoding='utf-8'))
 _live=[x for x in json.load(open('src/data/blog.json',encoding='utf-8')) if 'keywords' in x]
-_order=['why-users-churn-during-saas-onboarding','pretty-design-trap-saas-dashboard-retention','saas-pricing-page-ux-psychology','fintech-ux-design-trust-patterns','reduce-cognitive-overload-b2b-saas','anatomy-of-high-converting-saas-landing-page','what-a-saas-ux-audit-actually-uncovers','mobile-ux-for-b2b-saas-hidden-traffic','saas-microcopy-that-increases-conversions','consumer-grade-enterprise-software-design']
+_order=['why-users-churn-during-saas-onboarding','pretty-design-trap-saas-dashboard-retention','saas-pricing-page-ux-psychology','fintech-ux-design-trust-patterns','reduce-cognitive-overload-b2b-saas','anatomy-of-high-converting-saas-landing-page','what-a-saas-ux-audit-actually-uncovers','mobile-ux-for-b2b-saas-hidden-traffic','saas-microcopy-that-increases-conversions','consumer-grade-enterprise-software-design','first-framer-template-lessons']
 _ds={x['slug'] for x in drafts}
 drafts=sorted(drafts+[x for x in _live if x['slug'] not in _ds],key=lambda x:_order.index(x['slug']) if x['slug'] in _order else 99)
 LIVE={x['slug'] for x in _live}-_ds
-promo=['Day 1 (Oct 24)','Day 2 (Oct 25)','Day 3 (Oct 26)','Day 4 (Oct 27)','Day 5 (Oct 28)','Day 6 (Oct 29)','Day 7 (Oct 30)','Day 8 (Oct 31)','Day 9 (Nov 1)','Day 10 (Nov 2)']
+promo=['Day 1 (Oct 24)','Day 2 (Oct 25)','Day 3 (Oct 26)','Day 4 (Oct 27)','Day 5 (Oct 28)','Day 6 (Oct 29)','Day 7 (Oct 30)','Day 8 (Oct 31)','Day 9 (Nov 1)','Day 10 (Nov 2)','your own sharing plan (Reddit, Framer community, Discord)']
 def md(body):
     t=body
     t=re.sub(r'<!--\s*IMAGE:\s*(.*?)\s*\|\s*ALT:\s*(.*?)\s*-->',lambda m:f'\n> **Here you can add this kind of image:** {m.group(1)}. **Alt text:** {m.group(2)}\n',t)
